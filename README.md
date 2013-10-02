@@ -8,6 +8,8 @@ Work in progress, but the plan would be to allow use of Composer:
 
     $ composer create-project https://github.com/textpattern/fluxbb.git /
 
+After which you would follow the standard [FluxBB installation steps](http://fluxbb.org/docs/v1.5/installing).
+
 Development
 ------
 
