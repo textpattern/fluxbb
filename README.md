@@ -6,7 +6,7 @@ Install
 
 Work in progress, but the plan would be to allow use of Composer:
 
-    $ composer create-project textpattern/fluxbb /
+    $ composer create-project https://github.com/textpattern/fluxbb.git /
 
 Development
 ------
