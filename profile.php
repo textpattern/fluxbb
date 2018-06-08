@@ -576,6 +576,8 @@ else if ($action == 'promote')
 
 	confirm_referrer('viewtopic.php');
 
+	check_csrf($_GET['csrf_token']);
+
 	$pid = isset($_GET['pid']) ? intval($_GET['pid']) : 0;
 
 	$sql = 'SELECT g.g_promote_next_group FROM '.$db->prefix.'groups AS g INNER JOIN '.$db->prefix.'users AS u ON u.group_id=g.g_id WHERE u.id='.$id.' AND g.g_promote_next_group>0';
@@ -1388,7 +1390,7 @@ else
 									echo "\t\t\t\t\t\t\t\t".'<option value="'.$key.'"';
 									if ($user['time_format'] == $key)
 										echo ' selected="selected"';
-									echo '>'. format_time(time(), false, null, $time_format, true, true);
+									echo '>'. format_time(time(), false, null, $time_format, true, true, $user);
 									if ($key == 0)
 										echo ' ('.$lang_prof_reg['Default'].')';
 									echo "</option>\n";
@@ -1405,7 +1407,7 @@ else
 									echo "\t\t\t\t\t\t\t\t".'<option value="'.$key.'"';
 									if ($user['date_format'] == $key)
 										echo ' selected="selected"';
-									echo '>'. format_time(time(), true, $date_format, null, false, true);
+									echo '>'. format_time(time(), true, $date_format, null, false, true, $user);
 									if ($key == 0)
 										echo ' ('.$lang_prof_reg['Default'].')';
 									echo "</option>\n";
