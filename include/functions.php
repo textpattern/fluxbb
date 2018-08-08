@@ -1325,6 +1325,8 @@ function maintenance_message()
 {
 	global $db, $pun_config, $lang_common, $pun_user;
 
+	header('HTTP/1.1 503 Service Unavailable');
+
 	// Send no-cache headers
 	header('Expires: Thu, 21 Jul 1977 07:30:00 GMT'); // When yours truly first set eyes on this world! :)
 	header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
@@ -1600,6 +1602,8 @@ function error($message, $file = null, $line = null, $db_error = false)
 	// "Restart" output buffering if we are using ob_gzhandler (since the gzip header is already sent)
 	if ($pun_config['o_gzip'] && extension_loaded('zlib'))
 		ob_start('ob_gzhandler');
+
+	header('HTTP/1.1 500 Internal Server Error');
 
 	// Send no-cache headers
 	header('Expires: Thu, 21 Jul 1977 07:30:00 GMT'); // When yours truly first set eyes on this world! :)
