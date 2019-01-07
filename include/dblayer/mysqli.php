@@ -11,7 +11,10 @@ if (!function_exists('mysqli_connect'))
 	exit('This PHP environment doesn\'t have Improved MySQL (mysqli) support built in. Improved MySQL support is required if you want to use a MySQL 4.1 (or later) database to run this forum. Consult the PHP documentation for further assistance.');
 
 
-class DBLayer
+require_once PUN_ROOT.'include/dblayer/interface.php';
+
+
+class MysqlDBLayer implements DBLayer
 {
 	var $prefix;
 	var $link_id;
@@ -36,8 +39,7 @@ class DBLayer
 		if (strpos($db_host, ':') !== false)
 			list($db_host, $db_port) = explode(':', $db_host);
 
-		// Persistent connection in MySQLi are only available in PHP 5.3 and later releases
-		$p_connect = $p_connect && version_compare(PHP_VERSION, '5.3.0', '>=') ? 'p:' : '';
+		$p_connect = $p_connect ? 'p:' : '';
 
 		if (isset($db_port))
 			$this->link_id = @mysqli_connect($p_connect.$db_host, $db_username, $db_password, $db_name, $db_port);
@@ -50,14 +52,6 @@ class DBLayer
 		// Setup the client-server character set (UTF-8)
 		if (!defined('FORUM_NO_SET_NAMES'))
 			$this->set_names('utf8');
-
-		return $this->link_id;
-	}
-	
-	
-	function DBLayer($db_host, $db_username, $db_password, $db_name, $db_prefix, $p_connect)
-	{
-		$this->__construct($db_host, $db_username, $db_password, $db_name, $db_prefix, $p_connect);
 	}
 
 
@@ -76,14 +70,14 @@ class DBLayer
 	function query($sql, $unbuffered = false)
 	{
 		if (defined('PUN_SHOW_QUERIES'))
-			$q_start = get_microtime();
+			$q_start = microtime(true);
 
 		$this->query_result = @mysqli_query($this->link_id, $sql);
 
 		if ($this->query_result)
 		{
 			if (defined('PUN_SHOW_QUERIES'))
-				$this->saved_queries[] = array($sql, sprintf('%.5F', get_microtime() - $q_start));
+				$this->saved_queries[] = array($sql, sprintf('%.5F', microtime(true) - $q_start));
 
 			++$this->num_queries;
 
@@ -132,9 +126,9 @@ class DBLayer
 	}
 
 
-	function num_rows($query_id = 0)
+	function has_rows($query_id)
 	{
-		return ($query_id) ? @mysqli_num_rows($query_id) : false;
+		return mysqli_num_rows($query_id) > 0;
 	}
 
 
@@ -207,7 +201,7 @@ class DBLayer
 
 	function set_names($names)
 	{
-		return $this->query('SET NAMES \''.$this->escape($names).'\'');
+		return mysqli_set_charset($this->link_id, $names);
 	}
 
 
@@ -225,14 +219,14 @@ class DBLayer
 	function table_exists($table_name, $no_prefix = false)
 	{
 		$result = $this->query('SHOW TABLES LIKE \''.($no_prefix ? '' : $this->prefix).$this->escape($table_name).'\'');
-		return $this->num_rows($result) > 0;
+		return $this->has_rows($result);
 	}
 
 
 	function field_exists($table_name, $field_name, $no_prefix = false)
 	{
 		$result = $this->query('SHOW COLUMNS FROM '.($no_prefix ? '' : $this->prefix).$table_name.' LIKE \''.$this->escape($field_name).'\'');
-		return $this->num_rows($result) > 0;
+		return $this->has_rows($result);
 	}
 
 
