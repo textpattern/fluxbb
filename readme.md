@@ -10,8 +10,8 @@ of the other forums have whilst not sacrificing essential functionality or usabi
 ## Requirements
 
 * A webserver
-* PHP 4.4.0 or later
-* A database such as MySQL 4.1.2 or later, PostgreSQL 7.0 or later, or SQLite 2
+* PHP 5.6.4 or later
+* A database such as MySQL 5.0.6 or later, PostgreSQL 7.0 or later, or SQLite 2
 
 ## Recommendations
 
@@ -20,9 +20,9 @@ of the other forums have whilst not sacrificing essential functionality or usabi
 
 ## Links
 
-* Homepage: http://fluxbb.org
-* Documentation: http://fluxbb.org/docs/v1.5
-* Community: http://fluxbb.org/forums/
-* Resources: http://fluxbb.org/resources/
+* Homepage: https://fluxbb.org
+* Documentation: https://fluxbb.org/docs/v1.5
+* Community: https://fluxbb.org/forums/
+* Resources: https://fluxbb.org/resources/
 * IRC: irc://irc.freenode.net/fluxbb
-* Development: http://github.com/fluxbb/fluxbb
+* Development: https://github.com/fluxbb/fluxbb

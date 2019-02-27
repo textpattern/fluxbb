@@ -9,7 +9,7 @@
 // The FluxBB version this script updates to
 define('UPDATE_TO', '1.5.11');
 
-define('UPDATE_TO_DB_REVISION', 23);
+define('UPDATE_TO_DB_REVISION', 24);
 define('UPDATE_TO_SI_REVISION', 2);
 define('UPDATE_TO_PARSER_REVISION', 2);
 
@@ -706,6 +706,9 @@ switch ($stage)
 
 		// Drop save_pass column from users table
 		$db->drop_field('users', 'save_pass') or error('Unable to drop save_pass field', __FILE__, __LINE__, $db->error());
+
+		// Drop AOL IM column from users table
+		$db->drop_field('users', 'aim') or error('Unable to drop aim field', __FILE__, __LINE__, $db->error());
 
 		// Drop g_edit_subjects_interval column from groups table
 		$db->drop_field('groups', 'g_edit_subjects_interval');

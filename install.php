@@ -9,7 +9,7 @@
 // The FluxBB version this script installs
 define('FORUM_VERSION', '1.5.11');
 
-define('FORUM_DB_REVISION', 23);
+define('FORUM_DB_REVISION', 24);
 define('FORUM_SI_REVISION', 2);
 define('FORUM_PARSER_REVISION', 2);
 
@@ -166,7 +166,7 @@ else
 	else if (preg_match('%(?:\[/?(?:b|u|i|h|colou?r|quote|code|img|url|email|list)\]|\[(?:code|quote|list)=)%i', $username))
 		$alerts[] = $lang_install['Username 6'];
 
-	if (pun_strlen($password1) < 6)
+	if (pun_strlen($password1) < 9)
 		$alerts[] = $lang_install['Short password'];
 	else if ($password1 != $password2)
 		$alerts[] = $lang_install['Passwords not match'];
@@ -1287,7 +1287,7 @@ else
 				'default'		=> '\'\''
 			),
 			'password'			=> array(
-				'datatype'		=> 'VARCHAR(40)',
+				'datatype'		=> 'VARCHAR(255)',
 				'allow_null'	=> false,
 				'default'		=> '\'\''
 			),
@@ -1318,10 +1318,6 @@ else
 			),
 			'msn'				=> array(
 				'datatype'		=> 'VARCHAR(80)',
-				'allow_null'	=> true
-			),
-			'aim'				=> array(
-				'datatype'		=> 'VARCHAR(30)',
 				'allow_null'	=> true
 			),
 			'yahoo'				=> array(
