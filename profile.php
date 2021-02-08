@@ -136,11 +136,11 @@ if ($action == 'change_pass')
 					<legend><?php echo $lang_profile['Change pass legend'] ?></legend>
 					<div class="infldset">
 <?php if (!$pun_user['is_admmod']): ?>						<label class="required"><strong><?php echo $lang_profile['Old pass'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br />
-						<input type="password" name="req_old_password" size="16" /><br /></label>
+						<input type="password" name="req_old_password" size="16" required /><br /></label>
 <?php endif; ?>						<label class="conl required"><strong><?php echo $lang_profile['New pass'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br />
-						<input type="password" name="req_new_password1" size="16" /><br /></label>
+						<input type="password" name="req_new_password1" size="16" required /><br /></label>
 						<label class="conl required"><strong><?php echo $lang_profile['Confirm new pass'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br />
-						<input type="password" name="req_new_password2" size="16" /><br /></label>
+						<input type="password" name="req_new_password2" size="16" required /><br /></label>
 						<p class="clearb"><?php echo $lang_profile['Pass info'] ?></p>
 					</div>
 				</fieldset>
@@ -297,8 +297,8 @@ else if ($action == 'change_email')
 					<legend><?php echo $lang_profile['Email legend'] ?></legend>
 					<div class="infldset">
 						<input type="hidden" name="form_sent" value="1" />
-						<label class="required"><strong><?php echo $lang_profile['New email'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br /><input type="text" name="req_new_email" size="50" maxlength="80" /><br /></label>
-						<label class="required"><strong><?php echo $lang_common['Password'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br /><input type="password" name="req_password" size="16" /><br /></label>
+						<label class="required"><strong><?php echo $lang_profile['New email'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br /><input type="text" name="req_new_email" size="50" maxlength="80" autocomplete="email" required /><br /></label>
+						<label class="required"><strong><?php echo $lang_common['Password'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br /><input type="password" name="req_password" size="16" autocomplete="current-password" required /><br /></label>
 						<p><?php echo $lang_profile['Email instructions'] ?></p>
 					</div>
 				</fieldset>
@@ -427,7 +427,7 @@ else if ($action == 'upload_avatar' || $action == 'upload_avatar2')
 					<div class="infldset">
 						<input type="hidden" name="form_sent" value="1" />
 						<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $pun_config['o_avatars_size'] ?>" />
-						<label class="required"><strong><?php echo $lang_profile['File'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br /><input name="req_file" type="file" size="40" /><br /></label>
+						<label class="required"><strong><?php echo $lang_profile['File'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br /><input name="req_file" type="file" size="40" required /><br /></label>
 						<p><?php printf($lang_profile['Avatar desc'], $pun_config['o_avatars_width'], $pun_config['o_avatars_height'], forum_number_format($pun_config['o_avatars_size']), file_size($pun_config['o_avatars_size'])); ?></p>
 					</div>
 				</fieldset>
@@ -593,7 +593,7 @@ else if ($action == 'promote')
 }
 
 
-else if (isset($_POST['delete_user']) || isset($_POST['delete_user_comply']))
+else if (isset($_POST['delete_user']) || isset($_POST['delete_spammer']) || isset($_POST['delete_user_comply']) || isset($_POST['delete_spammer_comply']))
 {
 	if ($pun_user['g_id'] > PUN_ADMIN)
 		message($lang_common['No permission'], false, '403 Forbidden');
@@ -607,8 +607,16 @@ else if (isset($_POST['delete_user']) || isset($_POST['delete_user_comply']))
 	if ($group_id == PUN_ADMIN)
 		message($lang_profile['No delete admin message']);
 
-	if (isset($_POST['delete_user_comply']))
+	if (isset($_POST['delete_user_comply']) || isset($_POST['delete_spammer_comply']))
 	{
+		if (isset($_POST['delete_spammer_comply']))
+		{
+			// Include the antispam library
+			require PUN_ROOT.'include/spambarrier.php';
+
+  			// Lets report the bastard!
+  			sb_stopforumspam_report($registration_ip, $email, $username, '');
+		}
 		// If the user is a moderator or an administrator, we remove him/her from the moderator list in all forums as well
 		$result = $db->query('SELECT g_moderator FROM '.$db->prefix.'groups WHERE g_id='.$group_id) or error('Unable to fetch group', __FILE__, __LINE__, $db->error());
 		$group_mod = $db->result($result);
@@ -681,7 +689,7 @@ else if (isset($_POST['delete_user']) || isset($_POST['delete_user_comply']))
 		if ($group_id == PUN_ADMIN)
 			generate_admins_cache();
 
-		redirect('index.php', $lang_profile['User delete redirect']);
+		redirect('index.php', isset($_POST['delete_spammer_comply']) ? $lang_profile['Spammer delete redirect'] : $lang_profile['User delete redirect']);
 	}
 
 	$page_title = array(pun_htmlspecialchars($pun_config['o_board_title']), $lang_common['Profile'], $lang_profile['Confirm delete user']);
@@ -699,13 +707,14 @@ else if (isset($_POST['delete_user']) || isset($_POST['delete_user_comply']))
 					<div class="infldset">
 						<p><?php echo $lang_profile['Confirmation info'].' <strong>'.pun_htmlspecialchars($username).'</strong>.' ?></p>
 						<div class="rbox">
-							<label><input type="checkbox" name="delete_posts" value="1" checked="checked" /><?php echo $lang_profile['Delete posts'] ?><br /></label>
+							<label><input type="checkbox" name="delete_posts" value="1" checked /><?php echo $lang_profile['Delete posts'] ?><br /></label>
 						</div>
+						<?php if (isset($_POST['delete_spammer'])): ?><p><?php echo $lang_profile['Delete spammer note'] ?></p><?php endif; ?>
 						<p class="warntext"><strong><?php echo $lang_profile['Delete warning'] ?></strong></p>
 					</div>
 				</fieldset>
 			</div>
-			<p class="buttons"><input type="submit" name="delete_user_comply" value="<?php echo $lang_profile['Delete'] ?>" /> <a href="javascript:history.go(-1)"><?php echo $lang_common['Go back'] ?></a></p>
+			<p class="buttons"><input type="submit" name="<?php echo (isset($_POST['delete_spammer']) ? 'delete_spammer_comply' : 'delete_user_comply'); ?>" value="<?php echo $lang_profile['Delete'] ?>" /> <a href="javascript:history.go(-1)"><?php echo $lang_common['Go back'] ?></a></p>
 		</form>
 	</div>
 </div>
@@ -1256,11 +1265,11 @@ else
 		if ($pun_user['is_admmod'])
 		{
 			if ($pun_user['g_id'] == PUN_ADMIN || $pun_user['g_mod_rename_users'] == '1')
-				$username_field = '<label class="required"><strong>'.$lang_common['Username'].' <span>'.$lang_common['Required'].'</span></strong><br /><input type="text" name="req_username" value="'.pun_htmlspecialchars($user['username']).'" size="25" maxlength="25" /><br /></label>'."\n";
+				$username_field = '<label class="required"><strong>'.$lang_common['Username'].' <span>'.$lang_common['Required'].'</span></strong><br /><input type="text" name="req_username" value="'.pun_htmlspecialchars($user['username']).'" size="25" maxlength="25" autocomplete="username" required /><br /></label>'."\n";
 			else
 				$username_field = '<p>'.sprintf($lang_profile['Username info'], pun_htmlspecialchars($user['username'])).'</p>'."\n";
 
-			$email_field = '<label class="required"><strong>'.$lang_common['Email'].' <span>'.$lang_common['Required'].'</span></strong><br /><input type="text" name="req_email" value="'.pun_htmlspecialchars($user['email']).'" size="40" maxlength="80" /><br /></label><p><span class="email"><a href="misc.php?email='.$id.'">'.$lang_common['Send email'].'</a></span></p>'."\n";
+			$email_field = '<label class="required"><strong>'.$lang_common['Email'].' <span>'.$lang_common['Required'].'</span></strong><br /><input type="email" name="req_email" value="'.pun_htmlspecialchars($user['email']).'" size="40" maxlength="80" autocomplete="email" required /><br /></label><p><span class="email"><a href="misc.php?email='.$id.'">'.$lang_common['Send email'].'</a></span></p>'."\n";
 		}
 		else
 		{
@@ -1269,7 +1278,7 @@ else
 			if ($pun_config['o_regs_verify'] == '1')
 				$email_field = '<p>'.sprintf($lang_profile['Email info'], pun_htmlspecialchars($user['email']).' - <a href="profile.php?action=change_email&amp;id='.$id.'">'.$lang_profile['Change email'].'</a>').'</p>'."\n";
 			else
-				$email_field = '<label class="required"><strong>'.$lang_common['Email'].' <span>'.$lang_common['Required'].'</span></strong><br /><input type="text" name="req_email" value="'.$user['email'].'" size="40" maxlength="80" /><br /></label>'."\n";
+				$email_field = '<label class="required"><strong>'.$lang_common['Email'].' <span>'.$lang_common['Required'].'</span></strong><br /><input type="email" name="req_email" value="'.$user['email'].'" size="40" maxlength="80" autocomplete="email" required /><br /></label>'."\n";
 		}
 
 		$posts_field = '';
@@ -1372,7 +1381,7 @@ else
 							</select>
 							<br /></label>
 							<div class="rbox">
-								<label><input type="checkbox" name="form[dst]" value="1"<?php if ($user['dst'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_prof_reg['DST'] ?><br /></label>
+								<label><input type="checkbox" name="form[dst]" value="1"<?php if ($user['dst'] == '1') echo ' checked' ?> /><?php echo $lang_prof_reg['DST'] ?><br /></label>
 							</div>
 							<label><?php echo $lang_prof_reg['Time format'] ?>
 
@@ -1482,10 +1491,10 @@ else
 						<legend><?php echo $lang_profile['Personal details legend'] ?></legend>
 						<div class="infldset">
 							<input type="hidden" name="form_sent" value="1" />
-							<label><?php echo $lang_profile['Realname'] ?><br /><input type="text" name="form[realname]" value="<?php echo pun_htmlspecialchars($user['realname']) ?>" size="40" maxlength="40" /><br /></label>
+							<label><?php echo $lang_profile['Realname'] ?><br /><input type="text" name="form[realname]" value="<?php echo pun_htmlspecialchars($user['realname']) ?>" size="40" maxlength="40" autocomplete="name" /><br /></label>
 <?php if (isset($title_field)): ?>							<?php echo $title_field ?>
 <?php endif; ?>							<label><?php echo $lang_profile['Location'] ?><br /><input type="text" name="form[location]" value="<?php echo pun_htmlspecialchars($user['location']) ?>" size="30" maxlength="30" /><br /></label>
-<?php if ($pun_user['g_post_links'] == '1' || $pun_user['g_id'] == PUN_ADMIN) : ?>							<label><?php echo $lang_profile['Website'] ?><br /><input type="text" name="form[url]" value="<?php echo pun_htmlspecialchars($user['url']) ?>" size="50" maxlength="80" /><br /></label>
+<?php if ($pun_user['g_post_links'] == '1' || $pun_user['g_id'] == PUN_ADMIN) : ?>							<label><?php echo $lang_profile['Website'] ?><br /><input type="url" name="form[url]" value="<?php echo pun_htmlspecialchars($user['url']) ?>" size="50" maxlength="80" placeholder="http(s)://" autocomplete="url" /><br /></label>
 <?php endif; ?>
 						</div>
 					</fieldset>
@@ -1519,6 +1528,7 @@ else
 							<label><?php echo $lang_profile['Jabber'] ?><br /><input id="jabber" type="text" name="form[jabber]" value="<?php echo pun_htmlspecialchars($user['jabber']) ?>" size="40" maxlength="75" /><br /></label>
 							<label><?php echo $lang_profile['ICQ'] ?><br /><input id="icq" type="text" name="form[icq]" value="<?php echo $user['icq'] ?>" size="12" maxlength="12" /><br /></label>
 							<label><?php echo $lang_profile['MSN'] ?><br /><input id="msn" type="text" name="form[msn]" value="<?php echo pun_htmlspecialchars($user['msn']) ?>" size="40" maxlength="50" /><br /></label>
+							<label><?php echo $lang_profile['AOL IM'] ?><br /><input id="aim" type="text" name="form[aim]" value="<?php echo pun_htmlspecialchars($user['aim']) ?>" size="20" maxlength="30" /><br /></label>
 							<label><?php echo $lang_profile['Yahoo'] ?><br /><input id="yahoo" type="text" name="form[yahoo]" value="<?php echo pun_htmlspecialchars($user['yahoo']) ?>" size="20" maxlength="30" /><br /></label>
 						</div>
 					</fieldset>
@@ -1656,11 +1666,11 @@ else
 						<div class="infldset">
 							<p><?php echo $lang_profile['Post display info'] ?></p>
 							<div class="rbox">
-<?php if ($pun_config['o_smilies'] == '1' || $pun_config['o_smilies_sig'] == '1'): ?>								<label><input type="checkbox" name="form[show_smilies]" value="1"<?php if ($user['show_smilies'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_profile['Show smilies'] ?><br /></label>
-<?php endif; if ($pun_config['o_signatures'] == '1'): ?>								<label><input type="checkbox" name="form[show_sig]" value="1"<?php if ($user['show_sig'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_profile['Show sigs'] ?><br /></label>
-<?php endif; if ($pun_config['o_avatars'] == '1'): ?>								<label><input type="checkbox" name="form[show_avatars]" value="1"<?php if ($user['show_avatars'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_profile['Show avatars'] ?><br /></label>
-<?php endif; if ($pun_config['p_message_bbcode'] == '1' && $pun_config['p_message_img_tag'] == '1'): ?>								<label><input type="checkbox" name="form[show_img]" value="1"<?php if ($user['show_img'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_profile['Show images'] ?><br /></label>
-<?php endif; if ($pun_config['o_signatures'] == '1' && $pun_config['p_sig_bbcode'] == '1' && $pun_config['p_sig_img_tag'] == '1'): ?>								<label><input type="checkbox" name="form[show_img_sig]" value="1"<?php if ($user['show_img_sig'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_profile['Show images sigs'] ?><br /></label>
+<?php if ($pun_config['o_smilies'] == '1' || $pun_config['o_smilies_sig'] == '1'): ?>								<label><input type="checkbox" name="form[show_smilies]" value="1"<?php if ($user['show_smilies'] == '1') echo ' checked' ?> /><?php echo $lang_profile['Show smilies'] ?><br /></label>
+<?php endif; if ($pun_config['o_signatures'] == '1'): ?>								<label><input type="checkbox" name="form[show_sig]" value="1"<?php if ($user['show_sig'] == '1') echo ' checked' ?> /><?php echo $lang_profile['Show sigs'] ?><br /></label>
+<?php endif; if ($pun_config['o_avatars'] == '1'): ?>								<label><input type="checkbox" name="form[show_avatars]" value="1"<?php if ($user['show_avatars'] == '1') echo ' checked' ?> /><?php echo $lang_profile['Show avatars'] ?><br /></label>
+<?php endif; if ($pun_config['p_message_bbcode'] == '1' && $pun_config['p_message_img_tag'] == '1'): ?>								<label><input type="checkbox" name="form[show_img]" value="1"<?php if ($user['show_img'] == '1') echo ' checked' ?> /><?php echo $lang_profile['Show images'] ?><br /></label>
+<?php endif; if ($pun_config['o_signatures'] == '1' && $pun_config['p_sig_bbcode'] == '1' && $pun_config['p_sig_img_tag'] == '1'): ?>								<label><input type="checkbox" name="form[show_img_sig]" value="1"<?php if ($user['show_img_sig'] == '1') echo ' checked' ?> /><?php echo $lang_profile['Show images sigs'] ?><br /></label>
 <?php endif; ?>
 							</div>
 						</div>
@@ -1704,9 +1714,9 @@ else
 							<input type="hidden" name="form_sent" value="1" />
 							<p><?php echo $lang_prof_reg['Email setting info'] ?></p>
 							<div class="rbox">
-								<label><input type="radio" name="form[email_setting]" value="0"<?php if ($user['email_setting'] == '0') echo ' checked="checked"' ?> /><?php echo $lang_prof_reg['Email setting 1'] ?><br /></label>
-								<label><input type="radio" name="form[email_setting]" value="1"<?php if ($user['email_setting'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_prof_reg['Email setting 2'] ?><br /></label>
-								<label><input type="radio" name="form[email_setting]" value="2"<?php if ($user['email_setting'] == '2') echo ' checked="checked"' ?> /><?php echo $lang_prof_reg['Email setting 3'] ?><br /></label>
+								<label><input type="radio" name="form[email_setting]" value="0"<?php if ($user['email_setting'] == '0') echo ' checked' ?> /><?php echo $lang_prof_reg['Email setting 1'] ?><br /></label>
+								<label><input type="radio" name="form[email_setting]" value="1"<?php if ($user['email_setting'] == '1') echo ' checked' ?> /><?php echo $lang_prof_reg['Email setting 2'] ?><br /></label>
+								<label><input type="radio" name="form[email_setting]" value="2"<?php if ($user['email_setting'] == '2') echo ' checked' ?> /><?php echo $lang_prof_reg['Email setting 3'] ?><br /></label>
 							</div>
 						</div>
 					</fieldset>
@@ -1716,8 +1726,8 @@ else
 						<legend><?php echo $lang_profile['Subscription legend'] ?></legend>
 						<div class="infldset">
 							<div class="rbox">
-								<label><input type="checkbox" name="form[notify_with_post]" value="1"<?php if ($user['notify_with_post'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_profile['Notify full'] ?><br /></label>
-<?php if ($pun_config['o_topic_subscriptions'] == '1'): ?>								<label><input type="checkbox" name="form[auto_notify]" value="1"<?php if ($user['auto_notify'] == '1') echo ' checked="checked"' ?> /><?php echo $lang_profile['Auto notify full'] ?><br /></label>
+								<label><input type="checkbox" name="form[notify_with_post]" value="1"<?php if ($user['notify_with_post'] == '1') echo ' checked' ?> /><?php echo $lang_profile['Notify full'] ?><br /></label>
+<?php if ($pun_config['o_topic_subscriptions'] == '1'): ?>								<label><input type="checkbox" name="form[auto_notify]" value="1"<?php if ($user['auto_notify'] == '1') echo ' checked' ?> /><?php echo $lang_profile['Auto notify full'] ?><br /></label>
 <?php endif; ?>
 							</div>
 						</div>
@@ -1803,7 +1813,7 @@ else
 ?>
 						<legend><?php echo $lang_profile['Delete ban legend'] ?></legend>
 						<div class="infldset">
-							<input type="submit" name="delete_user" value="<?php echo $lang_profile['Delete user'] ?>" /> <input type="submit" name="ban" value="<?php echo $lang_profile['Ban user'] ?>" />
+							<input type="submit" name="delete_user" value="<?php echo $lang_profile['Delete user'] ?>" /> <input type="submit" name="delete_spammer" value="<?php echo $lang_profile['Delete spammer'] ?>" /> <input type="submit" name="ban" value="<?php echo $lang_profile['Ban user'] ?>" />
 						</div>
 					</fieldset>
 				</div>
@@ -1839,7 +1849,7 @@ else
 
 					$moderators = ($cur_forum['moderators'] != '') ? unserialize($cur_forum['moderators']) : array();
 
-					echo "\n\t\t\t\t\t\t\t\t\t".'<label><input type="checkbox" name="moderator_in['.$cur_forum['fid'].']" value="1"'.((in_array($id, $moderators)) ? ' checked="checked"' : '').' />'.pun_htmlspecialchars($cur_forum['forum_name']).'<br /></label>'."\n";
+					echo "\n\t\t\t\t\t\t\t\t\t".'<label><input type="checkbox" name="moderator_in['.$cur_forum['fid'].']" value="1"'.((in_array($id, $moderators)) ? ' checked' : '').' />'.pun_htmlspecialchars($cur_forum['forum_name']).'<br /></label>'."\n";
 				}
 
 ?>
