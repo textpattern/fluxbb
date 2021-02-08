@@ -311,8 +311,8 @@ generate_admin_menu('options');
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['DST label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[default_dst]" value="1"<?php if ($pun_config['o_default_dst'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[default_dst]" value="0"<?php if ($pun_config['o_default_dst'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[default_dst]" value="1"<?php if ($pun_config['o_default_dst'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[default_dst]" value="0"<?php if ($pun_config['o_default_dst'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['DST help'] ?></span>
 									</td>
 								</tr>
@@ -420,48 +420,48 @@ generate_admin_menu('options');
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Version number label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[show_version]" value="1"<?php if ($pun_config['o_show_version'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[show_version]" value="0"<?php if ($pun_config['o_show_version'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[show_version]" value="1"<?php if ($pun_config['o_show_version'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[show_version]" value="0"<?php if ($pun_config['o_show_version'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Version number help'] ?></span>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Info in posts label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[show_user_info]" value="1"<?php if ($pun_config['o_show_user_info'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[show_user_info]" value="0"<?php if ($pun_config['o_show_user_info'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[show_user_info]" value="1"<?php if ($pun_config['o_show_user_info'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[show_user_info]" value="0"<?php if ($pun_config['o_show_user_info'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Info in posts help'] ?></span>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Post count label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[show_post_count]" value="1"<?php if ($pun_config['o_show_post_count'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[show_post_count]" value="0"<?php if ($pun_config['o_show_post_count'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[show_post_count]" value="1"<?php if ($pun_config['o_show_post_count'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[show_post_count]" value="0"<?php if ($pun_config['o_show_post_count'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Post count help'] ?></span>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Smilies label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[smilies]" value="1"<?php if ($pun_config['o_smilies'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[smilies]" value="0"<?php if ($pun_config['o_smilies'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[smilies]" value="1"<?php if ($pun_config['o_smilies'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[smilies]" value="0"<?php if ($pun_config['o_smilies'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Smilies help'] ?></span>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Smilies sigs label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[smilies_sig]" value="1"<?php if ($pun_config['o_smilies_sig'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[smilies_sig]" value="0"<?php if ($pun_config['o_smilies_sig'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[smilies_sig]" value="1"<?php if ($pun_config['o_smilies_sig'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[smilies_sig]" value="0"<?php if ($pun_config['o_smilies_sig'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Smilies sigs help'] ?></span>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Clickable links label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[make_links]" value="1"<?php if ($pun_config['o_make_links'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[make_links]" value="0"<?php if ($pun_config['o_make_links'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[make_links]" value="1"<?php if ($pun_config['o_make_links'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[make_links]" value="0"<?php if ($pun_config['o_make_links'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Clickable links help'] ?></span>
 									</td>
 								</tr>
@@ -512,72 +512,72 @@ generate_admin_menu('options');
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Quick post label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[quickpost]" value="1"<?php if ($pun_config['o_quickpost'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[quickpost]" value="0"<?php if ($pun_config['o_quickpost'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[quickpost]" value="1"<?php if ($pun_config['o_quickpost'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[quickpost]" value="0"<?php if ($pun_config['o_quickpost'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Quick post help'] ?></span>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Users online label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[users_online]" value="1"<?php if ($pun_config['o_users_online'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[users_online]" value="0"<?php if ($pun_config['o_users_online'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[users_online]" value="1"<?php if ($pun_config['o_users_online'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[users_online]" value="0"<?php if ($pun_config['o_users_online'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Users online help'] ?></span>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><a name="censoring"></a><?php echo $lang_admin_options['Censor words label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[censoring]" value="1"<?php if ($pun_config['o_censoring'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[censoring]" value="0"<?php if ($pun_config['o_censoring'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[censoring]" value="1"<?php if ($pun_config['o_censoring'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[censoring]" value="0"<?php if ($pun_config['o_censoring'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php printf($lang_admin_options['Censor words help'], '<a href="admin_censoring.php">'.$lang_admin_common['Censoring'].'</a>') ?></span>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><a name="signatures"></a><?php echo $lang_admin_options['Signatures label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[signatures]" value="1"<?php if ($pun_config['o_signatures'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[signatures]" value="0"<?php if ($pun_config['o_signatures'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[signatures]" value="1"<?php if ($pun_config['o_signatures'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[signatures]" value="0"<?php if ($pun_config['o_signatures'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Signatures help'] ?></span>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['User has posted label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[show_dot]" value="1"<?php if ($pun_config['o_show_dot'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[show_dot]" value="0"<?php if ($pun_config['o_show_dot'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[show_dot]" value="1"<?php if ($pun_config['o_show_dot'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[show_dot]" value="0"<?php if ($pun_config['o_show_dot'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['User has posted help'] ?></span>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Topic views label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[topic_views]" value="1"<?php if ($pun_config['o_topic_views'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[topic_views]" value="0"<?php if ($pun_config['o_topic_views'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[topic_views]" value="1"<?php if ($pun_config['o_topic_views'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[topic_views]" value="0"<?php if ($pun_config['o_topic_views'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Topic views help'] ?></span>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Quick jump label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[quickjump]" value="1"<?php if ($pun_config['o_quickjump'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[quickjump]" value="0"<?php if ($pun_config['o_quickjump'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[quickjump]" value="1"<?php if ($pun_config['o_quickjump'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[quickjump]" value="0"<?php if ($pun_config['o_quickjump'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Quick jump help'] ?></span>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['GZip label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[gzip]" value="1"<?php if ($pun_config['o_gzip'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[gzip]" value="0"<?php if ($pun_config['o_gzip'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[gzip]" value="1"<?php if ($pun_config['o_gzip'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[gzip]" value="0"<?php if ($pun_config['o_gzip'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['GZip help'] ?></span>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Search all label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[search_all_forums]" value="1"<?php if ($pun_config['o_search_all_forums'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[search_all_forums]" value="0"<?php if ($pun_config['o_search_all_forums'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[search_all_forums]" value="1"<?php if ($pun_config['o_search_all_forums'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[search_all_forums]" value="0"<?php if ($pun_config['o_search_all_forums'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Search all help'] ?></span>
 									</td>
 								</tr>
@@ -600,9 +600,9 @@ generate_admin_menu('options');
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Default feed label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[feed_type]" value="0"<?php if ($pun_config['o_feed_type'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_options['None'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[feed_type]" value="1"<?php if ($pun_config['o_feed_type'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_options['RSS'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[feed_type]" value="2"<?php if ($pun_config['o_feed_type'] == '2') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_options['Atom'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[feed_type]" value="0"<?php if ($pun_config['o_feed_type'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_options['None'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[feed_type]" value="1"<?php if ($pun_config['o_feed_type'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_options['RSS'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[feed_type]" value="2"<?php if ($pun_config['o_feed_type'] == '2') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_options['Atom'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Default feed help'] ?></span>
 									</td>
 								</tr>
@@ -635,9 +635,9 @@ generate_admin_menu('options');
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Reporting method label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[report_method]" value="0"<?php if ($pun_config['o_report_method'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_options['Internal'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[report_method]" value="1"<?php if ($pun_config['o_report_method'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_options['By e-mail'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[report_method]" value="2"<?php if ($pun_config['o_report_method'] == '2') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_options['Both'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[report_method]" value="0"<?php if ($pun_config['o_report_method'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_options['Internal'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[report_method]" value="1"<?php if ($pun_config['o_report_method'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_options['By e-mail'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[report_method]" value="2"<?php if ($pun_config['o_report_method'] == '2') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_options['Both'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Reporting method help'] ?></span>
 									</td>
 								</tr>
@@ -660,8 +660,8 @@ generate_admin_menu('options');
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Use avatars label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[avatars]" value="1"<?php if ($pun_config['o_avatars'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[avatars]" value="0"<?php if ($pun_config['o_avatars'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[avatars]" value="1"<?php if ($pun_config['o_avatars'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[avatars]" value="0"<?php if ($pun_config['o_avatars'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Use avatars help'] ?></span>
 									</td>
 								</tr>
@@ -719,16 +719,16 @@ generate_admin_menu('options');
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Forum subscriptions label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[forum_subscriptions]" value="1"<?php if ($pun_config['o_forum_subscriptions'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[forum_subscriptions]" value="0"<?php if ($pun_config['o_forum_subscriptions'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[forum_subscriptions]" value="1"<?php if ($pun_config['o_forum_subscriptions'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[forum_subscriptions]" value="0"<?php if ($pun_config['o_forum_subscriptions'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Forum subscriptions help'] ?></span>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Topic subscriptions label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[topic_subscriptions]" value="1"<?php if ($pun_config['o_topic_subscriptions'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[topic_subscriptions]" value="0"<?php if ($pun_config['o_topic_subscriptions'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[topic_subscriptions]" value="1"<?php if ($pun_config['o_topic_subscriptions'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[topic_subscriptions]" value="0"<?php if ($pun_config['o_topic_subscriptions'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Topic subscriptions help'] ?></span>
 									</td>
 								</tr>
@@ -759,8 +759,8 @@ generate_admin_menu('options');
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['SMTP SSL label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[smtp_ssl]" value="1"<?php if ($pun_config['o_smtp_ssl'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[smtp_ssl]" value="0"<?php if ($pun_config['o_smtp_ssl'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[smtp_ssl]" value="1"<?php if ($pun_config['o_smtp_ssl'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[smtp_ssl]" value="0"<?php if ($pun_config['o_smtp_ssl'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['SMTP SSL help'] ?></span>
 									</td>
 								</tr>
@@ -776,32 +776,32 @@ generate_admin_menu('options');
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Allow new label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[regs_allow]" value="1"<?php if ($pun_config['o_regs_allow'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[regs_allow]" value="0"<?php if ($pun_config['o_regs_allow'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[regs_allow]" value="1"<?php if ($pun_config['o_regs_allow'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[regs_allow]" value="0"<?php if ($pun_config['o_regs_allow'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Allow new help'] ?></span>
 									</td> 
 								</tr>
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Verify label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[regs_verify]" value="1"<?php if ($pun_config['o_regs_verify'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[regs_verify]" value="0"<?php if ($pun_config['o_regs_verify'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[regs_verify]" value="1"<?php if ($pun_config['o_regs_verify'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[regs_verify]" value="0"<?php if ($pun_config['o_regs_verify'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Verify help'] ?></span>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Report new label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[regs_report]" value="1"<?php if ($pun_config['o_regs_report'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[regs_report]" value="0"<?php if ($pun_config['o_regs_report'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[regs_report]" value="1"<?php if ($pun_config['o_regs_report'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[regs_report]" value="0"<?php if ($pun_config['o_regs_report'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Report new help'] ?></span>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Use rules label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[rules]" value="1"<?php if ($pun_config['o_rules'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[rules]" value="0"<?php if ($pun_config['o_rules'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[rules]" value="1"<?php if ($pun_config['o_rules'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[rules]" value="0"<?php if ($pun_config['o_rules'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Use rules help'] ?></span>
 									</td>
 								</tr>
@@ -816,9 +816,9 @@ generate_admin_menu('options');
 									<th scope="row"><?php echo $lang_admin_options['E-mail default label'] ?></th>
 									<td>
 										<span><?php echo $lang_admin_options['E-mail default help'] ?></span>
-										<label><input type="radio" name="form[default_email_setting]" id="form_default_email_setting_0" value="0"<?php if ($pun_config['o_default_email_setting'] == '0') echo ' checked="checked"' ?> />&#160;<?php echo $lang_admin_options['Display e-mail label'] ?></label>
-										<label><input type="radio" name="form[default_email_setting]" id="form_default_email_setting_1" value="1"<?php if ($pun_config['o_default_email_setting'] == '1') echo ' checked="checked"' ?> />&#160;<?php echo $lang_admin_options['Hide allow form label'] ?></label>
-										<label><input type="radio" name="form[default_email_setting]" id="form_default_email_setting_2" value="2"<?php if ($pun_config['o_default_email_setting'] == '2') echo ' checked="checked"' ?> />&#160;<?php echo $lang_admin_options['Hide both label'] ?></label>
+										<label><input type="radio" name="form[default_email_setting]" id="form_default_email_setting_0" value="0"<?php if ($pun_config['o_default_email_setting'] == '0') echo ' checked' ?> />&#160;<?php echo $lang_admin_options['Display e-mail label'] ?></label>
+										<label><input type="radio" name="form[default_email_setting]" id="form_default_email_setting_1" value="1"<?php if ($pun_config['o_default_email_setting'] == '1') echo ' checked' ?> />&#160;<?php echo $lang_admin_options['Hide allow form label'] ?></label>
+										<label><input type="radio" name="form[default_email_setting]" id="form_default_email_setting_2" value="2"<?php if ($pun_config['o_default_email_setting'] == '2') echo ' checked' ?> />&#160;<?php echo $lang_admin_options['Hide both label'] ?></label>
 									</td>
 								</tr>
 							</table>
@@ -833,8 +833,8 @@ generate_admin_menu('options');
 								<tr>
 									<th scope="row"><?php echo $lang_admin_options['Display announcement label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[announcement]" value="1"<?php if ($pun_config['o_announcement'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[announcement]" value="0"<?php if ($pun_config['o_announcement'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[announcement]" value="1"<?php if ($pun_config['o_announcement'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[announcement]" value="0"<?php if ($pun_config['o_announcement'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Display announcement help'] ?></span>
 									</td>
 								</tr>
@@ -857,8 +857,8 @@ generate_admin_menu('options');
 								<tr>
 									<th scope="row"><a name="maintenance"></a><?php echo $lang_admin_options['Maintenance mode label'] ?></th>
 									<td>
-										<label class="conl"><input type="radio" name="form[maintenance]" value="1"<?php if ($pun_config['o_maintenance'] == '1') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
-										<label class="conl"><input type="radio" name="form[maintenance]" value="0"<?php if ($pun_config['o_maintenance'] == '0') echo ' checked="checked"' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[maintenance]" value="1"<?php if ($pun_config['o_maintenance'] == '1') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['Yes'] ?></strong></label>
+										<label class="conl"><input type="radio" name="form[maintenance]" value="0"<?php if ($pun_config['o_maintenance'] == '0') echo ' checked' ?> />&#160;<strong><?php echo $lang_admin_common['No'] ?></strong></label>
 										<span class="clearb"><?php echo $lang_admin_options['Maintenance mode help'] ?></span>
 									</td>
 								</tr>
