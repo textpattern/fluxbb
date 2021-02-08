@@ -33,5 +33,6 @@ $lang_register = array(
 'Pass info'					=>	'Passwords must be at least 9 characters long. Passwords are case sensitive.',
 'Email info'				=>	'You must enter a valid email address as your randomly generated password will be sent to that address.',
 'Confirm email'				=>	'Confirm email address',
+'If human'					=>	'If you want to be reported as a spammer, please fill in this field!',
 
 );
