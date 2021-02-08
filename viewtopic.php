@@ -171,20 +171,44 @@ else
 
 // Add relationship meta tags
 $page_head = array();
-$page_head['canonical'] = '<link rel="canonical" href="viewtopic.php?id='.$id.($p == 1 ? '' : '&amp;p='.$p).'" title="'.sprintf($lang_common['Page'], $p).'" />';
+$page_head['meta_robots'] = '<meta name="robots" content="index, follow">';
+$page_head['meta_desc'] = '<meta name="description" content="Postings in'.($p == 1 ? '' : ' page '.$p.' of').' the ‘'.pun_htmlspecialchars($cur_topic['subject']).'’ topic in the ‘'.pun_htmlspecialchars($cur_topic['forum_name']).'’ subforum.">';
+$page_head['twitter-card'] = '<meta name="twitter:card" content="summary">';
+$page_head['twitter-site'] = '<meta name="twitter:site" content="@txpforum">';
+$page_head['twitter-title'] = '<meta name="twitter:title" content="'.pun_htmlspecialchars($cur_topic['subject']).($p == 1 ? '' : ' ('.sprintf($lang_common['Page'], $p).')').'">';
+$page_head['twitter-description'] = '<meta name="twitter:description" content="Postings in'.($p == 1 ? '' : ' page '.$p.' of').' the ‘'.pun_htmlspecialchars($cur_topic['subject']).'’ topic in the ‘'.pun_htmlspecialchars($cur_topic['forum_name']).'’ subforum.">';
+$page_head['twitter-image'] = '<meta name="twitter:image:src" content="https://forum.textpattern.com/apple-touch-icon-180x180.png">';
+$page_head['twitter-url'] = '<meta name="twitter:url" content="https://forum.textpattern.com/viewtopic.php?id='.$id.($p == 1 ? '' : '&amp;p='.$p).'">';
+$page_head['og-site'] = '<meta property="og:site_name" content="Textpattern CMS support forum">';
+$page_head['og-type'] = '<meta property="og:type" content="website">';
+$page_head['og-title'] = '<meta property="og:title" content="'.pun_htmlspecialchars($cur_topic['subject']).($p == 1 ? '' : ' ('.sprintf($lang_common['Page'], $p).')').'">';
+$page_head['og-description'] = '<meta property="og:description" content="Postings in'.($p == 1 ? '' : ' page '.$p.' of').' the ‘'.pun_htmlspecialchars($cur_topic['subject']).'’ topic in the ‘'.pun_htmlspecialchars($cur_topic['forum_name']).'’ subforum.">';
+$page_head['og-image'] = '<meta property="og:image" content="https://textpattern.com/assets/img/branding/textpattern/textpattern-og.png">';
+$page_head['og-image-width'] = '<meta property="og:image:width" content="1200">';
+$page_head['og-image-height'] = '<meta property="og:image:height" content="1200">';
+$page_head['og-image-alt'] = '<meta property="og:image:alt" content="Textpattern logo">';
+$page_head['og-url'] = '<meta property="og:url" content="https://forum.textpattern.com/viewtopic.php?id='.$id.($p == 1 ? '' : '&amp;p='.$p).'">';
+$page_head['json-ld'] = '<script type="application/ld+json">'."\n".
+'{"@context": "https://schema.org",'."\n".
+'"@type": "WebPage",'."\n".
+'"headline": '.json_encode(pun_htmlspecialchars($cur_topic['subject']).($p == 1 ? '' : ' ('.sprintf($lang_common['Page'], $p).')')).','."\n".
+'"description": '.json_encode(pun_htmlspecialchars('Postings in'.($p == 1 ? '' : ' page '.$p.' of').' the ‘'.$cur_topic['subject'].'’ topic in the ‘'.$cur_topic['forum_name'].'’ subforum.')).','."\n".
+'"url": "https://forum.textpattern.com/viewtopic.php?id='.intval($id).($p == 1 ? '' : '&p='.intval($p)).'"}'."\n".
+'</script>';
+$page_head['canonical'] = '<link rel="canonical" href="https://forum.textpattern.com/viewtopic.php?id='.$id.($p == 1 ? '' : '&amp;p='.$p).'" title="'.sprintf($lang_common['Page'], $p).'">';
 
 if ($num_pages > 1)
 {
 	if ($p > 1)
-		$page_head['prev'] = '<link rel="prev" href="viewtopic.php?id='.$id.($p == 2 ? '' : '&amp;p='.($p - 1)).'" title="'.sprintf($lang_common['Page'], $p - 1).'" />';
+		$page_head['prev'] = '<link rel="prev" href="https://forum.textpattern.com/viewtopic.php?id='.$id.($p == 2 ? '' : '&amp;p='.($p - 1)).'" title="'.sprintf($lang_common['Page'], $p - 1).'">';
 	if ($p < $num_pages)
-		$page_head['next'] = '<link rel="next" href="viewtopic.php?id='.$id.'&amp;p='.($p + 1).'" title="'.sprintf($lang_common['Page'], $p + 1).'" />';
+		$page_head['next'] = '<link rel="next" href="https://forum.textpattern.com/viewtopic.php?id='.$id.'&amp;p='.($p + 1).'" title="'.sprintf($lang_common['Page'], $p + 1).'">';
 }
 
 if ($pun_config['o_feed_type'] == '1')
-	$page_head['feed'] = '<link rel="alternate" type="application/rss+xml" href="extern.php?action=feed&amp;tid='.$id.'&amp;type=rss" title="'.$lang_common['RSS topic feed'].'" />';
+	$page_head['feed'] = '<link rel="alternate" type="application/rss+xml" href="extern.php?action=feed&amp;tid='.$id.'&amp;type=rss" title="'.$lang_common['RSS topic feed'].'">';
 else if ($pun_config['o_feed_type'] == '2')
-	$page_head['feed'] = '<link rel="alternate" type="application/atom+xml" href="extern.php?action=feed&amp;tid='.$id.'&amp;type=atom" title="'.$lang_common['Atom topic feed'].'" />';
+	$page_head['feed'] = '<link rel="alternate" type="application/atom+xml" href="extern.php?action=feed&amp;tid='.$id.'&amp;type=atom" title="'.$lang_common['Atom topic feed'].'">';
 
 $crumbs = generate_crumbs(array(
 	array($lang_common['Index'], 'index.php'),
@@ -368,11 +392,11 @@ while ($cur_post = $db->fetch_assoc($result))
 
 ?>
 <div id="p<?php echo $cur_post['id'] ?>" class="blockpost<?php echo ($post_count % 2 == 0) ? ' roweven' : ' rowodd' ?><?php if ($cur_post['id'] == $cur_topic['first_post_id']) echo ' firstpost'; ?><?php if ($post_count == 1) echo ' blockpost1'; ?>">
-	<h2><span><span class="conr">#<?php echo ($start_from + $post_count) ?></span> <a href="viewtopic.php?pid=<?php echo $cur_post['id'].'#p'.$cur_post['id'] ?>"><?php echo format_time($cur_post['posted']) ?></a></span></h2>
 	<div class="box">
 		<div class="inbox">
 			<div class="postbody">
 				<div class="postleft">
+					<h2><span><span class="conr">#<?php echo ($start_from + $post_count) ?></span> <a href="viewtopic.php?pid=<?php echo $cur_post['id'].'#p'.$cur_post['id'] ?>"><?php echo format_time($cur_post['posted']) ?></a></span></h2>
 					<dl>
 						<dt><strong><?php echo $username ?></strong></dt>
 						<dd class="usertitle"><strong><?php echo $user_title ?></strong></dd>
@@ -445,8 +469,8 @@ if ($pun_user['is_guest'])
 	$email_form_name = ($pun_config['p_force_guest_email'] == '1') ? 'req_email' : 'email';
 
 ?>
-						<label class="conl required"><strong><?php echo $lang_post['Guest name'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br /><input type="text" name="req_username" size="25" maxlength="25" tabindex="<?php echo $cur_index++ ?>" /><br /></label>
-						<label class="conl<?php echo ($pun_config['p_force_guest_email'] == '1') ? ' required' : '' ?>"><?php echo $email_label ?><br /><input type="text" name="<?php echo $email_form_name ?>" size="50" maxlength="80" tabindex="<?php echo $cur_index++ ?>" /><br /></label>
+						<label class="conl required"><strong><?php echo $lang_post['Guest name'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br /><input type="text" name="req_username" size="25" maxlength="25" required /><br /></label>
+						<label class="conl<?php echo ($pun_config['p_force_guest_email'] == '1') ? ' required' : '' ?>"><?php echo $email_label ?><br /><input type="text" name="<?php echo $email_form_name ?>" size="50" maxlength="80" /><br /></label>
 						<div class="clearer"></div>
 <?php
 
@@ -456,7 +480,7 @@ else
 	echo "\t\t\t\t\t\t".'<label>';
 
 ?>
-<textarea name="req_message" rows="7" cols="75" tabindex="<?php echo $cur_index++ ?>"></textarea></label>
+<textarea name="req_message" rows="7" cols="75" required></textarea></label>
 						<ul class="bblinks">
 							<li><span><a href="help.php#bbcode" onclick="window.open(this.href); return false;"><?php echo $lang_common['BBCode'] ?></a> <?php echo ($pun_config['p_message_bbcode'] == '1') ? $lang_common['on'] : $lang_common['off']; ?></span></li>
 							<li><span><a href="help.php#url" onclick="window.open(this.href); return false;"><?php echo $lang_common['url tag'] ?></a> <?php echo ($pun_config['p_message_bbcode'] == '1' && $pun_user['g_post_links'] == '1') ? $lang_common['on'] : $lang_common['off']; ?></span></li>
@@ -467,7 +491,7 @@ else
 				</fieldset>
 			</div>
 <?php flux_hook('quickpost_before_submit') ?>
-			<p class="buttons"><input type="submit" name="submit" tabindex="<?php echo $cur_index++ ?>" value="<?php echo $lang_common['Submit'] ?>" accesskey="s" /> <input type="submit" name="preview" value="<?php echo $lang_topic['Preview'] ?>" tabindex="<?php echo $cur_index++ ?>" accesskey="p" /></p>
+			<p class="buttons"><input type="submit" name="submit" value="<?php echo $lang_common['Submit'] ?>" accesskey="s" /> <input type="submit" name="preview" value="<?php echo $lang_topic['Preview'] ?>" accesskey="p" /></p>
 		</form>
 	</div>
 </div>
