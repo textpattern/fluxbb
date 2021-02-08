@@ -276,7 +276,7 @@ if (isset($_GET['tid']))
 	require PUN_ROOT.'lang/'.$pun_user['language'].'/topic.php';
 
 	// Used to disable the Move and Delete buttons if there are no replies to this topic
-	$button_status = ($cur_topic['num_replies'] == 0) ? ' disabled="disabled"' : '';
+	$button_status = ($cur_topic['num_replies'] == 0) ? ' disabled' : '';
 
 	if (isset($_GET['action']) && $_GET['action'] == 'all')
 		$pun_user['disp_posts'] = $cur_topic['num_replies'] + 1;
@@ -365,11 +365,11 @@ if (isset($_GET['tid']))
 ?>
 
 <div id="p<?php echo $cur_post['id'] ?>" class="blockpost<?php if($cur_post['id'] == $cur_topic['first_post_id']) echo ' firstpost' ?><?php echo ($post_count % 2 == 0) ? ' roweven' : ' rowodd' ?><?php if ($post_count == 1) echo ' blockpost1' ?>">
-	<h2><span><span class="conr">#<?php echo ($start_from + $post_count) ?></span> <a href="viewtopic.php?pid=<?php echo $cur_post['id'].'#p'.$cur_post['id'] ?>"><?php echo format_time($cur_post['posted']) ?></a></span></h2>
 	<div class="box">
 		<div class="inbox">
 			<div class="postbody">
 				<div class="postleft">
+					<h2><span><span class="conr">#<?php echo ($start_from + $post_count) ?></span> <a href="viewtopic.php?pid=<?php echo $cur_post['id'].'#p'.$cur_post['id'] ?>"><?php echo format_time($cur_post['posted']) ?></a></span></h2>
 					<dl>
 						<dt><strong><?php echo $poster ?></strong></dt>
 						<dd class="usertitle"><strong><?php echo $user_title ?></strong></dd>
@@ -534,7 +534,7 @@ if (isset($_REQUEST['move_topics']) || isset($_POST['move_topics_to']))
 						</select>
 						<br /></label>
 						<div class="rbox">
-							<label><input type="checkbox" name="with_redirect" value="1"<?php if ($action == 'single') echo ' checked="checked"' ?> /><?php echo $lang_misc['Leave redirect'] ?><br /></label>
+							<label><input type="checkbox" name="with_redirect" value="1"<?php if ($action == 'single') echo ' checked' ?> /><?php echo $lang_misc['Leave redirect'] ?><br /></label>
 						</div>
 					</div>
 				</fieldset>
@@ -996,7 +996,7 @@ if ($db->has_rows($result))
 else
 {
 	$colspan = ($pun_config['o_topic_views'] == '1') ? 5 : 4;
-	$button_status = ' disabled="disabled"';
+	$button_status = ' disabled';
 	echo "\t\t\t\t\t".'<tr><td class="tcl" colspan="'.$colspan.'">'.$lang_forum['Empty forum'].'</td></tr>'."\n";
 }
 
