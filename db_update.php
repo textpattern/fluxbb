@@ -97,7 +97,7 @@ $db->start_transaction();
 $old_connection_charset = defined('FORUM_DEFAULT_CHARSET') ? FORUM_DEFAULT_CHARSET : $db->get_names();
 
 // Set the connection to UTF-8 now
-$db->set_names('utf8');
+$db->set_names('utf8mb4');
 
 // Get the forum config
 $result = $db->query('SELECT * FROM '.$db->prefix.'config') or error('Unable to fetch config.', __FILE__, __LINE__, $db->error());
@@ -556,7 +556,7 @@ if (empty($stage))
 					<legend><?php echo $lang_update['Charset conversion'] ?></legend>
 					<div class="infldset">
 						<div class="rbox">
-							<label><input type="checkbox" name="convert_charset" value="1" checked="checked" /><?php echo $lang_update['Enable conversion label'] ?><br /></label>
+							<label><input type="checkbox" name="convert_charset" value="1" checked /><?php echo $lang_update['Enable conversion label'] ?><br /></label>
 						</div>
 						<label>
 							<strong><?php echo $lang_update['Current character set label'] ?></strong><br /><?php echo $lang_update['Current character set info'] ?><br />
