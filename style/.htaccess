@@ -1,0 +1,22 @@
+<ifModule mod_headers.c>
+    Header unset X-XSS-Protection
+    Header unset X-Frame-Options
+    Header unset X-Content-Type-Options
+    Header unset Content-Security-Policy
+    Header append Cache-Control "public"
+
+    <FilesMatch "\.(css|js|svg)$">
+        Header append Vary "Accept-Encoding"
+    </FilesMatch>
+</ifModule>
+
+<ifModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 year"
+</ifModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteRule ^(.*?)\.[0-9]+\.(css|js|svg)$ $1.$2 [L]
+</IfModule>
