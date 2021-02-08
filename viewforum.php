@@ -80,20 +80,44 @@ $paging_links = '<span class="pages-label">'.$lang_common['Pages'].' </span>'.pa
 
 // Add relationship meta tags
 $page_head = array();
-$page_head['canonical'] = '<link rel="canonical" href="viewforum.php?id='.$id.($p == 1 ? '' : '&amp;p='.$p).'" title="'.sprintf($lang_common['Page'], $p).'" />';
+$page_head['meta_robots'] = '<meta name="robots" content="noindex, follow">';
+$page_head['meta_desc'] = '<meta name="description" content="Listings in'.($p == 1 ? '' : ' page '.$p.' of').' the ‘'.pun_htmlspecialchars($cur_forum['forum_name']).'’ subforum at the Textpattern CMS support forum.">';
+$page_head['twitter-card'] = '<meta name="twitter:card" content="summary">';
+$page_head['twitter-site'] = '<meta name="twitter:site" content="@txpforum">';
+$page_head['twitter-title'] = '<meta name="twitter:title" content="'.pun_htmlspecialchars($cur_forum['forum_name']).($p == 1 ? '' : ' ('.sprintf($lang_common['Page'], $p).')').'">';
+$page_head['twitter-description'] = '<meta name="twitter:description" content="Listings in'.($p == 1 ? '' : ' page '.$p.' of').' the ‘'.pun_htmlspecialchars($cur_forum['forum_name']).'’ subforum at the Textpattern CMS support forum.">';
+$page_head['twitter-image'] = '<meta name="twitter:image:src" content="https://forum.textpattern.com/apple-touch-icon-180x180.png">';
+$page_head['twitter-url'] = '<meta name="twitter:url" content="https://forum.textpattern.com/viewforum.php?id='.$id.($p == 1 ? '' : '&amp;p='.$p).'">';
+$page_head['og-site'] = '<meta property="og:site_name" content="Textpattern CMS support forum">';
+$page_head['og-type'] = '<meta property="og:type" content="website">';
+$page_head['og-title'] = '<meta property="og:title" content="'.pun_htmlspecialchars($cur_forum['forum_name']).($p == 1 ? '' : ' ('.sprintf($lang_common['Page'], $p).')').'">';
+$page_head['og-description'] = '<meta property="og:description" content="Listings in'.($p == 1 ? '' : ' page '.$p.' of').' the ‘'.pun_htmlspecialchars($cur_forum['forum_name']).'’ subforum at the Textpattern CMS support forum.">';
+$page_head['og-image'] = '<meta property="og:image" content="https://textpattern.com/assets/img/branding/textpattern/textpattern-og.png">';
+$page_head['og-image-width'] = '<meta property="og:image:width" content="1200">';
+$page_head['og-image-height'] = '<meta property="og:image:height" content="1200">';
+$page_head['og-image-alt'] = '<meta property="og:image:alt" content="Textpattern logo">';
+$page_head['og-url'] = '<meta property="og:url" content="https://forum.textpattern.com/viewforum.php?id='.$id.($p == 1 ? '' : '&amp;p='.$p).'">';
+$page_head['json-ld'] = '<script type="application/ld+json">'."\n".
+'{"@context": "https://schema.org",'."\n".
+'"@type": "WebPage",'."\n".
+'"headline": '.json_encode(pun_htmlspecialchars($cur_forum['forum_name']).($p == 1 ? '' : ' ('.sprintf($lang_common['Page'], $p).')')).','."\n".
+'"description": '.json_encode(pun_htmlspecialchars('Listings in'.($p == 1 ? '' : ' page '.$p.' of').' the ‘'.pun_htmlspecialchars($cur_forum['forum_name']).'’ subforum at the Textpattern CMS support forum.')).','."\n".
+'"url": "https://forum.textpattern.com/viewforum.php?id='.intval($id).($p == 1 ? '' : '&p='.intval($p)).'"}'."\n".
+'</script>';
+$page_head['canonical'] = '<link rel="canonical" href="https://forum.textpattern.com/viewforum.php?id='.$id.($p == 1 ? '' : '&amp;p='.$p).'" title="'.sprintf($lang_common['Page'], $p).'">';
 
 if ($num_pages > 1)
 {
 	if ($p > 1)
-		$page_head['prev'] = '<link rel="prev" href="viewforum.php?id='.$id.($p == 2 ? '' : '&amp;p='.($p - 1)).'" title="'.sprintf($lang_common['Page'], $p - 1).'" />';
+		$page_head['prev'] = '<link rel="prev" href="https://forum.textpattern.com/viewforum.php?id='.$id.($p == 2 ? '' : '&amp;p='.($p - 1)).'" title="'.sprintf($lang_common['Page'], $p - 1).'">';
 	if ($p < $num_pages)
-		$page_head['next'] = '<link rel="next" href="viewforum.php?id='.$id.'&amp;p='.($p + 1).'" title="'.sprintf($lang_common['Page'], $p + 1).'" />';
+		$page_head['next'] = '<link rel="next" href="https://forum.textpattern.com/viewforum.php?id='.$id.'&amp;p='.($p + 1).'" title="'.sprintf($lang_common['Page'], $p + 1).'">';
 }
 
 if ($pun_config['o_feed_type'] == '1')
-	$page_head['feed'] = '<link rel="alternate" type="application/rss+xml" href="extern.php?action=feed&amp;fid='.$id.'&amp;type=rss" title="'.$lang_common['RSS forum feed'].'" />';
+	$page_head['feed'] = '<link rel="alternate" type="application/rss+xml" href="extern.php?action=feed&amp;fid='.$id.'&amp;type=rss" title="'.$lang_common['RSS forum feed'].'">';
 else if ($pun_config['o_feed_type'] == '2')
-	$page_head['feed'] = '<link rel="alternate" type="application/atom+xml" href="extern.php?action=feed&amp;fid='.$id.'&amp;type=atom" title="'.$lang_common['Atom forum feed'].'" />';
+	$page_head['feed'] = '<link rel="alternate" type="application/atom+xml" href="extern.php?action=feed&amp;fid='.$id.'&amp;type=atom" title="'.$lang_common['Atom forum feed'].'">';
 
 $forum_actions = array();
 
@@ -299,7 +323,7 @@ else
 <?php echo $post_link ?>
 		</div>
 		<?php echo $crumbs ?>
-<?php echo (!empty($forum_actions) ? "\t\t".'<p class="subscribelink clearb">'.implode(' - ', $forum_actions).'</p>'."\n" : '') ?>
+<?php echo (!empty($forum_actions) ? "\t\t".'<p class="subscribelink clearb">'.implode(' ', $forum_actions).'</p>'."\n" : '') ?>
 		<div class="clearer"></div>
 	</div>
 </div>
