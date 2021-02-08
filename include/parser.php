@@ -722,9 +722,9 @@ function handle_img_tag($url, $is_signature = false, $alt = null)
 	$img_tag = '<a href="'.$url.'" rel="nofollow">&lt;'.$lang_common['Image link'].' - '.$alt.'&gt;</a>';
 
 	if ($is_signature && $pun_user['show_img_sig'] != '0')
-		$img_tag = '<img class="sigimage" src="'.$url.'" alt="'.$alt.'" />';
+		$img_tag = '<img loading="lazy" class="sigimage" src="'.$url.'" alt="'.$alt.'" />';
 	else if (!$is_signature && $pun_user['show_img'] != '0')
-		$img_tag = '<span class="postimg"><img src="'.$url.'" alt="'.$alt.'" /></span>';
+		$img_tag = '<span class="postimg"><img loading="lazy" src="'.$url.'" alt="'.$alt.'" /></span>';
 
 	return $img_tag;
 }
@@ -907,7 +907,7 @@ function do_smilies($text)
 	foreach ($smilies as $smiley_text => $smiley_img)
 	{
 		if (strpos($text, $smiley_text) !== false)
-			$text = ucp_preg_replace('%(?<=[>\s])'.preg_quote($smiley_text, '%').'(?=[^\p{L}\p{N}])%um', '<img src="'.pun_htmlspecialchars(get_base_url(true).'/img/smilies/'.$smiley_img).'" width="15" height="15" alt="'.substr($smiley_img, 0, strrpos($smiley_img, '.')).'" />', $text);
+			$text = ucp_preg_replace('%(?<=[>\s])'.preg_quote($smiley_text, '%').'(?=[^\p{L}\p{N}])%um', '<img loading="lazy" src="'.pun_htmlspecialchars(get_base_url(true).'/img/smilies/'.$smiley_img).'" width="15" height="15" alt="'.substr($smiley_img, 0, strrpos($smiley_img, '.')).'" />', $text);
 	}
 
 	return substr($text, 1, -1);
@@ -920,45 +920,24 @@ function do_smilies($text)
 function parse_message($text, $hide_smilies)
 {
 	global $pun_config, $lang_common, $pun_user;
+	static $textile = null;
 
 	if ($pun_config['o_censoring'] == '1')
-		$text = censor_words($text);
-
-	// Convert applicable characters to HTML entities
-	$text = pun_htmlspecialchars($text);
-
-	// If the message contains a code tag we have to split it up (text within [code][/code] shouldn't be touched)
-	if (strpos($text, '[code]') !== false && strpos($text, '[/code]') !== false)
-		list($inside, $text) = extract_blocks($text, '[code]', '[/code]');
-
-	if ($pun_config['p_message_bbcode'] == '1' && strpos($text, '[') !== false && strpos($text, ']') !== false)
-		$text = do_bbcode($text);
-
-	if ($pun_config['o_smilies'] == '1' && $pun_user['show_smilies'] == '1' && $hide_smilies == '0')
-		$text = do_smilies($text);
-
-	// Deal with newlines, tabs and multiple spaces
-	$pattern = array("\n", "\t", '  ', '  ');
-	$replace = array('<br />', '&#160; &#160; ', '&#160; ', ' &#160;');
-	$text = str_replace($pattern, $replace, $text);
-
-	// If we split up the message before we have to concatenate it together again (code tags)
-	if (isset($inside))
 	{
-		$parts = explode("\1", $text);
-		$text = '';
-		foreach ($parts as $i => $part)
-		{
-			$text .= $part;
-			if (isset($inside[$i]))
-			{
-				$num_lines = (substr_count($inside[$i], "\n"));
-				$text .= '</p><div class="codebox"><pre'.(($num_lines > 28) ? ' class="vscroll"' : '').'><code>'.pun_trim($inside[$i], "\n\r").'</code></pre></div><p>';
-			}
-		}
+		$text = censor_words($text);
 	}
 
-	return clean_paragraphs($text);
+	if ($textile === null)
+    {
+		$textile = new Textpattern\Fluxbb\Textile\Parser();
+    }
+
+	if (defined('PUN_NEW_MEMBER') && $cur_post['group_id'] == PUN_NEW_MEMBER)
+	{
+		return $textile->setImages(false)->parse($text);
+	}
+
+	return $textile->setImages(true)->parse($text);
 }
 
 
@@ -994,24 +973,22 @@ function clean_paragraphs($text)
 function parse_signature($text)
 {
 	global $pun_config, $lang_common, $pun_user;
+	static $textile = null;
 
 	if ($pun_config['o_censoring'] == '1')
+	{
 		$text = censor_words($text);
+	}
 
-	// Convert applicable characters to HTML entities
-	$text = pun_htmlspecialchars($text);
+	if ($textile === null)
+	{
+		$textile = new Textpattern\Fluxbb\Textile\Parser();
+	}
 
-	if ($pun_config['p_sig_bbcode'] == '1' && strpos($text, '[') !== false && strpos($text, ']') !== false)
-		$text = do_bbcode($text, true);
+	if (defined('PUN_NEW_MEMBER') && $cur_post['group_id'] == PUN_NEW_MEMBER)
+	{
+		return $textile->setImages(false)->parse($text);
+	}
 
-	if ($pun_config['o_smilies_sig'] == '1' && $pun_user['show_smilies'] == '1')
-		$text = do_smilies($text);
-
-
-	// Deal with newlines, tabs and multiple spaces
-	$pattern = array("\n", "\t", '  ', '  ');
-	$replace = array('<br />', '&#160; &#160; ', '&#160; ', ' &#160;');
-	$text = str_replace($pattern, $replace, $text);
-
-	return clean_paragraphs($text);
+	return $textile->setImages(true)->parse($text);
 }
