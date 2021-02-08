@@ -26,6 +26,12 @@ require PUN_ROOT.'lang/'.$pun_user['language'].'/prof_reg.php';
 if ($pun_config['o_regs_allow'] == '0')
 	message($lang_register['No new regs']);
 
+// HoneyPot Field Name
+	if (($pun_config['o_sb_custom_field'] == 0))
+		$reqfield = 'req_honeypot';
+	else
+		$reqfield=(!empty($pun_config['o_sb_custom_field_name'])) ? $pun_config['o_sb_custom_field_name'] : 'req_honeypot';
+//End of HoneyPot Field Name
 
 // User pressed the cancel button
 if (isset($_GET['cancel']))
@@ -74,7 +80,7 @@ if (isset($_POST['form_sent']))
 		message($lang_register['Registration flood']);
 
 
-	$username = pun_trim($_POST['req_user']);
+	$username = pun_trim($_POST[$reqfield]);
 	$email1 = strtolower(pun_trim($_POST['req_email1']));
 
 	if ($pun_config['o_regs_verify'] == '1')
@@ -149,6 +155,21 @@ if (isset($_POST['form_sent']))
 		$email_setting = $pun_config['o_default_email_setting'];
 
 	flux_hook('register_after_validation');
+
+//
+// Begin of SpamBarrier check
+//
+
+	// Include the antispam library
+	require PUN_ROOT.'include/spambarrier.php';
+
+	$req_username = empty($username) ? pun_trim($_POST['req_user']) : $username;
+
+	sb_check_spam_registration($req_username,$email1);
+
+//
+// End of SpamBarrier check
+//
 
 	// Did everything go according to plan?
 	if (empty($errors))
@@ -265,8 +286,8 @@ if (isset($_POST['form_sent']))
 
 
 $page_title = array(pun_htmlspecialchars($pun_config['o_board_title']), $lang_register['Register']);
-$required_fields = array('req_user' => $lang_common['Username'], 'req_password1' => $lang_common['Password'], 'req_password2' => $lang_prof_reg['Confirm pass'], 'req_email1' => $lang_common['Email'], 'req_email2' => $lang_common['Email'].' 2');
-$focus_element = array('register', 'req_user');
+$required_fields = array($reqfield => $lang_common['Username'], 'req_password1' => $lang_common['Password'], 'req_password2' => $lang_prof_reg['Confirm pass'], 'req_email1' => $lang_common['Email'], 'req_email2' => $lang_common['Email'].' 2');
+$focus_element = array('register', $reqfield);
 
 flux_hook('register_before_header');
 
@@ -316,7 +337,9 @@ if (!empty($errors))
 					<legend><?php echo $lang_register['Username legend'] ?></legend>
 					<div class="infldset">
 						<input type="hidden" name="form_sent" value="1" />
-						<label class="required"><strong><?php echo $lang_common['Username'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br /><input type="text" name="req_user" value="<?php if (isset($_POST['req_user'])) echo pun_htmlspecialchars($_POST['req_user']); ?>" size="25" maxlength="25" /><br /></label>
+						<label class="required usernamefield"><strong><?php echo $lang_register['If human'] ?></strong><br /><input type="text" name="req_user" value="" size="25" maxlength="25" /><br /></label>
+						<label class="required"><strong><?php echo $lang_common['Username'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br /><input type="text" name="<?php echo $reqfield ?>" value="<?php if (isset($_POST[$reqfield])) echo pun_htmlspecialchars($_POST[$reqfield]); ?>" size="25" maxlength="25" autocomplete="username" required /><br /></label>
+
 					</div>
 				</fieldset>
 			</div>
@@ -324,8 +347,8 @@ if (!empty($errors))
 				<fieldset>
 					<legend><?php echo $lang_register['Pass legend'] ?></legend>
 					<div class="infldset">
-						<label class="conl required"><strong><?php echo $lang_common['Password'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br /><input type="password" name="req_password1" value="<?php if (isset($_POST['req_password1'])) echo pun_htmlspecialchars($_POST['req_password1']); ?>" size="16" /><br /></label>
-						<label class="conl required"><strong><?php echo $lang_prof_reg['Confirm pass'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br /><input type="password" name="req_password2" value="<?php if (isset($_POST['req_password2'])) echo pun_htmlspecialchars($_POST['req_password2']); ?>" size="16" /><br /></label>
+						<label class="conl required"><strong><?php echo $lang_common['Password'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br /><input type="password" name="req_password1" value="<?php if (isset($_POST['req_password1'])) echo pun_htmlspecialchars($_POST['req_password1']); ?>" size="16" autocomplete="new-password" required /><br /></label>
+						<label class="conl required"><strong><?php echo $lang_prof_reg['Confirm pass'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br /><input type="password" name="req_password2" value="<?php if (isset($_POST['req_password2'])) echo pun_htmlspecialchars($_POST['req_password2']); ?>" size="16" autocomplete="new-password" required /><br /></label>
 						<p class="clearb"><?php echo $lang_register['Pass info'] ?></p>
 					</div>
 				</fieldset>
@@ -336,9 +359,9 @@ if (!empty($errors))
 					<div class="infldset">
 <?php if ($pun_config['o_regs_verify'] == '1'): ?>						<p><?php echo $lang_register['Email info'] ?></p>
 <?php endif; ?>						<label class="required"><strong><?php echo $lang_common['Email'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br />
-						<input type="text" name="req_email1" value="<?php if (isset($_POST['req_email1'])) echo pun_htmlspecialchars($_POST['req_email1']); ?>" size="50" maxlength="80" /><br /></label>
+						<input type="email" name="req_email1" value="<?php if (isset($_POST['req_email1'])) echo pun_htmlspecialchars($_POST['req_email1']); ?>" size="50" maxlength="80" autocomplete="email" required /><br /></label>
 <?php if ($pun_config['o_regs_verify'] == '1'): ?>						<label class="required"><strong><?php echo $lang_register['Confirm email'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br />
-						<input type="text" name="req_email2" value="<?php if (isset($_POST['req_email2'])) echo pun_htmlspecialchars($_POST['req_email2']); ?>" size="50" maxlength="80" /><br /></label>
+						<input type="email" name="req_email2" value="<?php if (isset($_POST['req_email2'])) echo pun_htmlspecialchars($_POST['req_email2']); ?>" size="50" maxlength="80" autocomplete="email" required /><br /></label>
 <?php endif; ?>					</div>
 				</fieldset>
 			</div>
@@ -392,7 +415,7 @@ if (!empty($errors))
 						</select>
 						<br /></label>
 						<div class="rbox">
-							<label><input type="checkbox" name="dst" value="1"<?php if ($dst == '1') echo ' checked="checked"' ?> /><?php echo $lang_prof_reg['DST'] ?><br /></label>
+							<label><input type="checkbox" name="dst" value="1"<?php if ($dst == '1') echo ' checked' ?> /><?php echo $lang_prof_reg['DST'] ?><br /></label>
 						</div>
 <?php
 
@@ -431,9 +454,9 @@ if (!empty($errors))
 					<div class="infldset">
 						<p><?php echo $lang_prof_reg['Email setting info'] ?></p>
 						<div class="rbox">
-							<label><input type="radio" name="email_setting" value="0"<?php if ($email_setting == '0') echo ' checked="checked"' ?> /><?php echo $lang_prof_reg['Email setting 1'] ?><br /></label>
-							<label><input type="radio" name="email_setting" value="1"<?php if ($email_setting == '1') echo ' checked="checked"' ?> /><?php echo $lang_prof_reg['Email setting 2'] ?><br /></label>
-							<label><input type="radio" name="email_setting" value="2"<?php if ($email_setting == '2') echo ' checked="checked"' ?> /><?php echo $lang_prof_reg['Email setting 3'] ?><br /></label>
+							<label><input type="radio" name="email_setting" value="0"<?php if ($email_setting == '0') echo ' checked' ?> /><?php echo $lang_prof_reg['Email setting 1'] ?><br /></label>
+							<label><input type="radio" name="email_setting" value="1"<?php if ($email_setting == '1') echo ' checked' ?> /><?php echo $lang_prof_reg['Email setting 2'] ?><br /></label>
+							<label><input type="radio" name="email_setting" value="2"<?php if ($email_setting == '2') echo ' checked' ?> /><?php echo $lang_prof_reg['Email setting 3'] ?><br /></label>
 						</div>
 					</div>
 				</fieldset>
