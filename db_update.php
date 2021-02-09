@@ -97,7 +97,7 @@ $db->start_transaction();
 $old_connection_charset = defined('FORUM_DEFAULT_CHARSET') ? FORUM_DEFAULT_CHARSET : $db->get_names();
 
 // Set the connection to UTF-8 now
-$db->set_names('utf8');
+$db->set_names('utf8mb4');
 
 // Get the forum config
 $result = $db->query('SELECT * FROM '.$db->prefix.'config') or error('Unable to fetch config.', __FILE__, __LINE__, $db->error());
