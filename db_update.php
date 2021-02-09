@@ -556,7 +556,7 @@ if (empty($stage))
 					<legend><?php echo $lang_update['Charset conversion'] ?></legend>
 					<div class="infldset">
 						<div class="rbox">
-							<label><input type="checkbox" name="convert_charset" value="1" checked="checked" /><?php echo $lang_update['Enable conversion label'] ?><br /></label>
+							<label><input type="checkbox" name="convert_charset" value="1" checked /><?php echo $lang_update['Enable conversion label'] ?><br /></label>
 						</div>
 						<label>
 							<strong><?php echo $lang_update['Current character set label'] ?></strong><br /><?php echo $lang_update['Current character set info'] ?><br />
@@ -679,6 +679,7 @@ switch ($stage)
 		$db->alter_field('posts', 'poster_email', 'VARCHAR(80)', true) or error('Unable to alter poster_email field', __FILE__, __LINE__, $db->error());
 		$db->alter_field('users', 'email', 'VARCHAR(80)', false, '') or error('Unable to alter email field', __FILE__, __LINE__, $db->error());
 		$db->alter_field('users', 'jabber', 'VARCHAR(80)', true) or error('Unable to alter jabber field', __FILE__, __LINE__, $db->error());
+		$db->alter_field('users', 'msn', 'VARCHAR(80)', true) or error('Unable to alter msn field', __FILE__, __LINE__, $db->error());
 		$db->alter_field('users', 'activate_string', 'VARCHAR(80)', true) or error('Unable to alter activate_string field', __FILE__, __LINE__, $db->error());
 
 		// Make all IP fields VARCHAR(39) to support IPv6
@@ -708,12 +709,6 @@ switch ($stage)
 
 		// Drop AOL IM column from users table
 		$db->drop_field('users', 'aim') or error('Unable to drop aim field', __FILE__, __LINE__, $db->error());
-
-		// Drop Microsoft Account column from users table
-		$db->drop_field('users', 'msn') or error('Unable to drop msn field', __FILE__, __LINE__, $db->error());
-
-		// Drop Yahoo Messenger column from users table
-		$db->drop_field('users', 'yahoo') or error('Unable to drop yahoo field', __FILE__, __LINE__, $db->error());
 
 		// Drop g_edit_subjects_interval column from groups table
 		$db->drop_field('groups', 'g_edit_subjects_interval');
