@@ -1219,7 +1219,7 @@ if ($pun_user['id'] != $id &&																	// If we aren't the user (i.e. edi
 			</div>
 <?php if (!empty($user_messaging)): ?>			<div class="inform">
 				<fieldset>
-				<legend><?php echo $lang_profile['Section messaging'] ?></legend>
+				<legend>Social media channels</legend>
 					<div class="infldset">
 						<dl>
 							<?php echo implode("\n\t\t\t\t\t\t\t", $user_messaging)."\n" ?>
@@ -1509,7 +1509,7 @@ else
 	else if ($section == 'messaging')
 	{
 
-		$page_title = array(pun_htmlspecialchars($pun_config['o_board_title']), $lang_common['Profile'], $lang_profile['Section messaging']);
+		$page_title = array(pun_htmlspecialchars($pun_config['o_board_title']), $lang_common['Profile'], 'Social media channels');
 		define('PUN_ACTIVE_PAGE', 'profile');
 		require PUN_ROOT.'header.php';
 
@@ -1517,18 +1517,19 @@ else
 
 ?>
 	<div class="blockform">
-		<h2><span><?php echo pun_htmlspecialchars($user['username']).' - '.$lang_profile['Section messaging'] ?></span></h2>
+		<h2><span><?php echo pun_htmlspecialchars($user['username']).' - Social media channels' ?></span></h2>
 		<div class="box">
 			<form id="profile3" method="post" action="profile.php?section=messaging&amp;id=<?php echo $id ?>">
 				<div class="inform">
 					<fieldset>
-						<legend><?php echo $lang_profile['Contact details legend'] ?></legend>
+						<legend>Enter your social media channel details</legend>
 						<div class="infldset">
 							<input type="hidden" name="form_sent" value="1" />
-							<label><?php echo $lang_profile['Jabber'] ?><br /><input id="jabber" type="text" name="form[jabber]" value="<?php echo pun_htmlspecialchars($user['jabber']) ?>" size="40" maxlength="75" /><br /></label>
-							<label><?php echo $lang_profile['ICQ'] ?><br /><input id="icq" type="text" name="form[icq]" value="<?php echo $user['icq'] ?>" size="12" maxlength="12" /><br /></label>
-							<label><?php echo $lang_profile['MSN'] ?><br /><input id="msn" type="text" name="form[msn]" value="<?php echo pun_htmlspecialchars($user['msn']) ?>" size="40" maxlength="50" /><br /></label>
-							<label><?php echo $lang_profile['Yahoo'] ?><br /><input id="yahoo" type="text" name="form[yahoo]" value="<?php echo pun_htmlspecialchars($user['yahoo']) ?>" size="20" maxlength="30" /><br /></label>
+							<label>Bitbucket<br /><input id="bitbucket" type="text" name="form[bitbucket]" value="<?php echo pun_htmlspecialchars($user['bitbucket']) ?>" size="40" maxlength="75" placeholder="https://bitbucket.org/your_bitbucket_name" /><br /></label>
+							<label>GitHub<br /><input id="github" type="text" name="form[github]" value="<?php echo pun_htmlspecialchars($user['github']) ?>" size="40" maxlength="75" placeholder="https://github.com/your_github_name" /><br /></label>
+							<label>GitLab<br /><input id="gitlab" type="text" name="form[gitlab]" value="<?php echo pun_htmlspecialchars($user['gitlab']) ?>" size="40" maxlength="75" placeholder="https://gitlab.com/your_gitlab_name" /><br /></label>
+							<label>Mastodon<br /><input id="mastodon" type="text" name="form[mastodon]" value="<?php echo pun_htmlspecialchars($user['github']) ?>" size="40" maxlength="75" placeholder="https://github.com/your_github_name" /><br /></label>
+							<label>Twitter<br /><input id="twitter" type="text" name="form[twitter]" value="<?php echo pun_htmlspecialchars($user['twitter']) ?>" size="40" maxlength="75" placeholder="https://twitter.com/your_twitter_name" /><br /></label>
 						</div>
 					</fieldset>
 				</div>
