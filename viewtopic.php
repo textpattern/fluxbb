@@ -304,16 +304,16 @@ while ($cur_post = $db->fetch_assoc($result))
 
 			// Now let's deal with the contact links (Email and URL)
 			if ((($cur_post['email_setting'] == '0' && !$pun_user['is_guest']) || $pun_user['is_admmod']) && $pun_user['g_send_email'] == '1')
-				$user_contacts[] = '<span class="email"><a href="mailto:'.pun_htmlspecialchars($cur_post['email']).'">'.$lang_common['Email'].'</a></span>';
+				$user_contacts[] = '<a href="mailto:'.pun_htmlspecialchars($cur_post['email']).'" title="'.$lang_common['Email'].'"><span class="ui-icon ui-icon-mail-closed">'.$lang_common['Email'].'</span></a>';
 			else if ($cur_post['email_setting'] == '1' && !$pun_user['is_guest'] && $pun_user['g_send_email'] == '1')
-				$user_contacts[] = '<span class="email"><a href="misc.php?email='.$cur_post['poster_id'].'">'.$lang_common['Email'].'</a></span>';
+				$user_contacts[] = '<a href="misc.php?email='.$cur_post['poster_id'].'" title="'.$lang_common['Email'].'"><span class="ui-icon ui-icon-mail-closed">'.$lang_common['Email'].'</span></a>';
 
 			if ($cur_post['url'] != '')
 			{
 				if ($pun_config['o_censoring'] == '1')
 					$cur_post['url'] = censor_words($cur_post['url']);
 
-				$user_contacts[] = '<span class="website"><a href="'.pun_htmlspecialchars($cur_post['url']).'" rel="nofollow">'.$lang_topic['Website'].'</a></span>';
+				$user_contacts[] = '<a href="'.pun_htmlspecialchars($cur_post['url']).'" rel="nofollow" title="'.$lang_topic['Website'].'"><span class="ui-icon ui-icon-home">'.$lang_topic['Website'].'</span></a>';
 			}
 		}
 
