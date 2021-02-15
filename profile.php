@@ -1053,7 +1053,7 @@ else if (isset($_POST['form_sent']))
 flux_hook('profile_after_form_handling');
 
 
-$result = $db->query('SELECT u.username, u.email, u.title, u.realname, u.url, u.jabber, u.icq, u.msn, u.yahoo, u.location, u.signature, u.disp_topics, u.disp_posts, u.email_setting, u.notify_with_post, u.auto_notify, u.show_smilies, u.show_img, u.show_img_sig, u.show_avatars, u.show_sig, u.timezone, u.dst, u.language, u.style, u.num_posts, u.last_post, u.registered, u.registration_ip, u.admin_note, u.date_format, u.time_format, u.last_visit, g.g_id, g.g_user_title, g.g_moderator FROM '.$db->prefix.'users AS u LEFT JOIN '.$db->prefix.'groups AS g ON g.g_id=u.group_id WHERE u.id='.$id) or error('Unable to fetch user info', __FILE__, __LINE__, $db->error());
+$result = $db->query('SELECT u.username, u.email, u.title, u.realname, u.url, u.bitbucket, u.github, u.gitlab, u.mastodon, u.twitter, u.location, u.signature, u.disp_topics, u.disp_posts, u.email_setting, u.notify_with_post, u.auto_notify, u.show_smilies, u.show_img, u.show_img_sig, u.show_avatars, u.show_sig, u.timezone, u.dst, u.language, u.style, u.num_posts, u.last_post, u.registered, u.registration_ip, u.admin_note, u.date_format, u.time_format, u.last_visit, g.g_id, g.g_user_title, g.g_moderator FROM '.$db->prefix.'users AS u LEFT JOIN '.$db->prefix.'groups AS g ON g.g_id=u.group_id WHERE u.id='.$id) or error('Unable to fetch user info', __FILE__, __LINE__, $db->error());
 if (!$db->has_rows($result))
 	message($lang_common['Bad request'], false, '404 Not Found');
 
@@ -1118,28 +1118,34 @@ if ($pun_user['id'] != $id &&																	// If we aren't the user (i.e. edi
 
 	$user_messaging = array();
 
-	if ($user['jabber'] != '')
+	if ($user['bitbucket'] != '')
 	{
-		$user_messaging[] = '<dt>'.$lang_profile['Jabber'].'</dt>';
-		$user_messaging[] = '<dd>'.pun_htmlspecialchars(($pun_config['o_censoring'] == '1') ? censor_words($user['jabber']) : $user['jabber']).'</dd>';
+		$user_messaging[] = '<dt>Bitbucket</dt>';
+		$user_messaging[] = '<dd>'.pun_htmlspecialchars(($pun_config['o_censoring'] == '1') ? censor_words($user['bitbucket']) : $user['bitbucket']).'</dd>';
 	}
 
-	if ($user['icq'] != '')
+	if ($user['github'] != '')
 	{
-		$user_messaging[] = '<dt>'.$lang_profile['ICQ'].'</dt>';
-		$user_messaging[] = '<dd>'.$user['icq'].'</dd>';
+		$user_messaging[] = '<dt>GitHub</dt>';
+		$user_messaging[] = '<dd>'.pun_htmlspecialchars(($pun_config['o_censoring'] == '1') ? censor_words($user['github']) : $user['github']).'</dd>';
 	}
 
-	if ($user['msn'] != '')
+	if ($user['gitlab'] != '')
 	{
-		$user_messaging[] = '<dt>'.$lang_profile['MSN'].'</dt>';
-		$user_messaging[] = '<dd>'.pun_htmlspecialchars(($pun_config['o_censoring'] == '1') ? censor_words($user['msn']) : $user['msn']).'</dd>';
+		$user_messaging[] = '<dt>GitLab</dt>';
+		$user_messaging[] = '<dd>'.pun_htmlspecialchars(($pun_config['o_censoring'] == '1') ? censor_words($user['gitlab']) : $user['gitlab']).'</dd>';
 	}
 
-	if ($user['yahoo'] != '')
+	if ($user['mastodon'] != '')
 	{
-		$user_messaging[] = '<dt>'.$lang_profile['Yahoo'].'</dt>';
-		$user_messaging[] = '<dd>'.pun_htmlspecialchars(($pun_config['o_censoring'] == '1') ? censor_words($user['yahoo']) : $user['yahoo']).'</dd>';
+		$user_messaging[] = '<dt>Mastodon</dt>';
+		$user_messaging[] = '<dd>'.pun_htmlspecialchars(($pun_config['o_censoring'] == '1') ? censor_words($user['mastodon']) : $user['mastodon']).'</dd>';
+	}
+
+	if ($user['twitter'] != '')
+	{
+		$user_messaging[] = '<dt>Twitter</dt>';
+		$user_messaging[] = '<dd>'.pun_htmlspecialchars(($pun_config['o_censoring'] == '1') ? censor_words($user['twitter']) : $user['twitter']).'</dd>';
 	}
 
 	$user_personality = array();
