@@ -870,8 +870,8 @@ else if (isset($_POST['form_sent']))
 			);
 
 			// If the ICQ UIN contains anything other than digits it's invalid
-			if (preg_match('%[^0-9]%', $form['icq']))
-				message($lang_prof_reg['Bad ICQ']);
+			//if (preg_match('%[^0-9]%', $form['icq']))
+			//	message($lang_prof_reg['Bad ICQ']);
 
 			break;
 		}
