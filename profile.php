@@ -601,8 +601,8 @@ else if (isset($_POST['delete_user']) || isset($_POST['delete_spammer']) || isse
 	confirm_referrer('profile.php');
 
 	// Get the username and group of the user we are deleting
-	$result = $db->query('SELECT group_id, username FROM '.$db->prefix.'users WHERE id='.$id) or error('Unable to fetch user info', __FILE__, __LINE__, $db->error());
-	list($group_id, $username) = $db->fetch_row($result);
+	$result = $db->query('SELECT group_id, username, email, registration_ip FROM '.$db->prefix.'users WHERE id='.$id) or error('Unable to fetch user info', __FILE__, __LINE__, $db->error());
+	list($group_id, $username, $email, $registration_ip) = $db->fetch_row($result);
 
 	if ($group_id == PUN_ADMIN)
 		message($lang_profile['No delete admin message']);
