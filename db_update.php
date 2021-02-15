@@ -713,16 +713,16 @@ switch ($stage)
 // Start of Textpattern customisation
 
 		// Drop Jabber column from users table
-		$db->drop_field('users', 'aim') or error('Unable to drop aim field', __FILE__, __LINE__, $db->error());
+		$db->drop_field('users', 'jabber') or error('Unable to drop jabber field', __FILE__, __LINE__, $db->error());
 
 		// Drop ICQ column from users table
-		$db->drop_field('users', 'icq') or error('Unable to drop aim field', __FILE__, __LINE__, $db->error());
+		$db->drop_field('users', 'icq') or error('Unable to drop icq field', __FILE__, __LINE__, $db->error());
 
 		// Drop MSN column from users table
-		$db->drop_field('users', 'msn') or error('Unable to drop aim field', __FILE__, __LINE__, $db->error());
+		$db->drop_field('users', 'msn') or error('Unable to drop msn field', __FILE__, __LINE__, $db->error());
 
 		// Drop Yahoo! column from users table
-		$db->drop_field('users', 'yahoo') or error('Unable to drop aim field', __FILE__, __LINE__, $db->error());
+		$db->drop_field('users', 'yahoo') or error('Unable to drop yahoo field', __FILE__, __LINE__, $db->error());
 
 		// Add the last_search column to the online table
 		$db->add_field('users', 'bitbucket', 'VARCHAR(100)', true, null, null) or error('Unable to add Bitbucket field', __FILE__, __LINE__, $db->error());
