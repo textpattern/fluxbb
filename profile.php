@@ -1535,7 +1535,7 @@ else
 							<label>Bitbucket<br /><input id="bitbucket" type="text" name="form[bitbucket]" value="<?php echo pun_htmlspecialchars($user['bitbucket']) ?>" size="40" maxlength="75" placeholder="https://bitbucket.org/your_bitbucket_name" /><br /></label>
 							<label>GitHub<br /><input id="github" type="text" name="form[github]" value="<?php echo pun_htmlspecialchars($user['github']) ?>" size="40" maxlength="75" placeholder="https://github.com/your_github_name" /><br /></label>
 							<label>GitLab<br /><input id="gitlab" type="text" name="form[gitlab]" value="<?php echo pun_htmlspecialchars($user['gitlab']) ?>" size="40" maxlength="75" placeholder="https://gitlab.com/your_gitlab_name" /><br /></label>
-							<label>Mastodon<br /><input id="mastodon" type="text" name="form[mastodon]" value="<?php echo pun_htmlspecialchars($user['github']) ?>" size="40" maxlength="75" placeholder="https://github.com/your_github_name" /><br /></label>
+							<label>Mastodon<br /><input id="mastodon" type="text" name="form[mastodon]" value="<?php echo pun_htmlspecialchars($user['github']) ?>" size="40" maxlength="75" placeholder="https://your_mastodon_url" /><br /></label>
 							<label>Twitter<br /><input id="twitter" type="text" name="form[twitter]" value="<?php echo pun_htmlspecialchars($user['twitter']) ?>" size="40" maxlength="75" placeholder="https://twitter.com/your_twitter_name" /><br /></label>
 						</div>
 					</fieldset>
