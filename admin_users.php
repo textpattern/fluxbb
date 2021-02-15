@@ -770,7 +770,7 @@ else if (isset($_GET['find_user']))
 	foreach ($form as $key => $input)
 	{
 //		if ($input != '' && in_array($key, array('username', 'email', 'title', 'realname', 'url', 'jabber', 'icq', 'msn', 'yahoo', 'location', 'signature', 'admin_note')))
-		if ($input != '' && in_array($key, array('username', 'email', 'title', 'realname', 'url', 'bitbucket', 'github', 'gitlab', 'mastodon', 'twitter', 'location', 'signature', 'admin_note'))) // Textpattern customisation
+		if ($input != '' && in_array($key, array('username', 'email', 'title', 'realname', 'url', 'location', 'signature', 'admin_note', 'bitbucket', 'github', 'gitlab', 'mastodon', 'twitter'))) // Textpattern customisation
 		{
 			$conditions[] = 'u.'.$db->escape($key).' '.$like_command.' \''.$db->escape(str_replace(array('*', '_'), array('%', '\\_'), $input)).'\'';
 			$query_str[] = 'form%5B'.$key.'%5D='.urlencode($input);
@@ -951,20 +951,24 @@ else
 									<td><input type="text" name="form[url]" size="35" maxlength="100" /></td>
 								</tr>
 								<tr>
-									<th scope="row"><?php echo $lang_admin_users['Jabber label'] ?></th>
-									<td><input type="text" name="form[jabber]" size="30" maxlength="75" /></td>
+									<th scope="row">Bitbucket</th>
+									<td><input type="text" name="form[bitbucket]" size="30" maxlength="75" /></td>
 								</tr>
 								<tr>
-									<th scope="row"><?php echo $lang_admin_users['ICQ label'] ?></th>
-									<td><input type="text" name="form[icq]" size="12" maxlength="12" /></td>
+									<th scope="row">GitHub</th>
+									<td><input type="text" name="form[github]" size="30" maxlength="75" /></td>
 								</tr>
 								<tr>
-									<th scope="row"><?php echo $lang_admin_users['MSN label'] ?></th>
-									<td><input type="text" name="form[msn]" size="30" maxlength="50" /></td>
+									<th scope="row">GitLab</th>
+									<td><input type="text" name="form[gitlab]" size="30" maxlength="75" /></td>
 								</tr>
 								<tr>
-									<th scope="row"><?php echo $lang_admin_users['Yahoo label'] ?></th>
-									<td><input type="text" name="form[yahoo]" size="20" maxlength="20" /></td>
+									<th scope="row">Mastodon</th>
+									<td><input type="text" name="form[mastodon]" size="30" maxlength="75" /></td>
+								</tr>
+								<tr>
+									<th scope="row">Twitter</th>
+									<td><input type="text" name="form[twitter]" size="30" maxlength="75" /></td>
 								</tr>
 								<tr>
 									<th scope="row"><?php echo $lang_admin_users['Location label'] ?></th>
