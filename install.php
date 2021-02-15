@@ -1308,22 +1308,44 @@ else
 				'datatype'		=> 'VARCHAR(100)',
 				'allow_null'	=> true
 			),
-			'jabber'			=> array(
-				'datatype'		=> 'VARCHAR(80)',
+// Start of Textpattern customisation
+//			'jabber'			=> array(
+//				'datatype'		=> 'VARCHAR(80)',
+//				'allow_null'	=> true
+//			),
+//			'icq'				=> array(
+//				'datatype'		=> 'VARCHAR(12)',
+//				'allow_null'	=> true
+//			),
+//			'msn'				=> array(
+//				'datatype'		=> 'VARCHAR(80)',
+//				'allow_null'	=> true
+//			),
+//			'yahoo'				=> array(
+//				'datatype'		=> 'VARCHAR(30)',
+//				'allow_null'	=> true
+//			),
+			'bitbucket'			=> array(
+				'datatype'		=> 'VARCHAR(100)',
 				'allow_null'	=> true
 			),
-			'icq'				=> array(
-				'datatype'		=> 'VARCHAR(12)',
+			'github'			=> array(
+				'datatype'		=> 'VARCHAR(100)',
 				'allow_null'	=> true
 			),
-			'msn'				=> array(
-				'datatype'		=> 'VARCHAR(80)',
+			'gitlab'			=> array(
+				'datatype'		=> 'VARCHAR(100)',
 				'allow_null'	=> true
 			),
-			'yahoo'				=> array(
-				'datatype'		=> 'VARCHAR(30)',
+			'mastodon'			=> array(
+				'datatype'		=> 'VARCHAR(100)',
 				'allow_null'	=> true
 			),
+			'twitter'			=> array(
+				'datatype'		=> 'VARCHAR(100)',
+				'allow_null'	=> true
+			),
+// End of Textpattern customisation
 			'location'			=> array(
 				'datatype'		=> 'VARCHAR(30)',
 				'allow_null'	=> true

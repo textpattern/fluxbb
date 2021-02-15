@@ -678,8 +678,8 @@ switch ($stage)
 		$db->alter_field('bans', 'email', 'VARCHAR(80)', true) or error('Unable to alter email field', __FILE__, __LINE__, $db->error());
 		$db->alter_field('posts', 'poster_email', 'VARCHAR(80)', true) or error('Unable to alter poster_email field', __FILE__, __LINE__, $db->error());
 		$db->alter_field('users', 'email', 'VARCHAR(80)', false, '') or error('Unable to alter email field', __FILE__, __LINE__, $db->error());
-		$db->alter_field('users', 'jabber', 'VARCHAR(80)', true) or error('Unable to alter jabber field', __FILE__, __LINE__, $db->error());
-		$db->alter_field('users', 'msn', 'VARCHAR(80)', true) or error('Unable to alter msn field', __FILE__, __LINE__, $db->error());
+//		$db->alter_field('users', 'jabber', 'VARCHAR(80)', true) or error('Unable to alter jabber field', __FILE__, __LINE__, $db->error());
+//		$db->alter_field('users', 'msn', 'VARCHAR(80)', true) or error('Unable to alter msn field', __FILE__, __LINE__, $db->error());
 		$db->alter_field('users', 'activate_string', 'VARCHAR(80)', true) or error('Unable to alter activate_string field', __FILE__, __LINE__, $db->error());
 
 		// Make all IP fields VARCHAR(39) to support IPv6
@@ -709,6 +709,37 @@ switch ($stage)
 
 		// Drop AOL IM column from users table
 		$db->drop_field('users', 'aim') or error('Unable to drop aim field', __FILE__, __LINE__, $db->error());
+
+// Start of Textpattern customisation
+
+		// Drop Jabber column from users table
+		$db->drop_field('users', 'aim') or error('Unable to drop aim field', __FILE__, __LINE__, $db->error());
+
+		// Drop ICQ column from users table
+		$db->drop_field('users', 'icq') or error('Unable to drop aim field', __FILE__, __LINE__, $db->error());
+
+		// Drop MSN column from users table
+		$db->drop_field('users', 'msn') or error('Unable to drop aim field', __FILE__, __LINE__, $db->error());
+
+		// Drop Yahoo! column from users table
+		$db->drop_field('users', 'yahoo') or error('Unable to drop aim field', __FILE__, __LINE__, $db->error());
+
+		// Add the last_search column to the online table
+		$db->add_field('users', 'bitbucket', 'VARCHAR(100)', true, null, null) or error('Unable to add Bitbucket field', __FILE__, __LINE__, $db->error());
+
+		// Add the last_search column to the online table
+		$db->add_field('users', 'github', 'VARCHAR(100)', true, null, null) or error('Unable to add GitHub field', __FILE__, __LINE__, $db->error());
+
+		// Add the last_search column to the online table
+		$db->add_field('users', 'gitlab', 'VARCHAR(100)', true, null, null) or error('Unable to add GitLab field', __FILE__, __LINE__, $db->error());
+
+		// Add the last_search column to the online table
+		$db->add_field('users', 'mastodon', 'VARCHAR(100)', true, null, null) or error('Unable to add Mastodon field', __FILE__, __LINE__, $db->error());
+
+		// Add the last_search column to the online table
+		$db->add_field('users', 'twitter', 'VARCHAR(100)', true, null, null) or error('Unable to add Twitter field', __FILE__, __LINE__, $db->error());
+
+// End of Textpattern customisation
 
 		// Drop g_edit_subjects_interval column from groups table
 		$db->drop_field('groups', 'g_edit_subjects_interval');
