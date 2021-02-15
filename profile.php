@@ -862,10 +862,11 @@ else if (isset($_POST['form_sent']))
 		case 'messaging':
 		{
 			$form = array(
-				'jabber'		=> pun_trim($_POST['form']['jabber']),
-				'icq'			=> pun_trim($_POST['form']['icq']),
-				'msn'			=> pun_trim($_POST['form']['msn']),
-				'yahoo'			=> pun_trim($_POST['form']['yahoo']),
+				'bitbucket'	=> pun_trim($_POST['form']['bitbucket']),
+				'github'	=> pun_trim($_POST['form']['github']),
+				'gitlab'	=> pun_trim($_POST['form']['gitlab']),
+				'mastodon'	=> pun_trim($_POST['form']['mastodon']),
+				'twitter'	=> pun_trim($_POST['form']['twitter']),
 			);
 
 			// If the ICQ UIN contains anything other than digits it's invalid
