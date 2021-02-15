@@ -315,6 +315,48 @@ while ($cur_post = $db->fetch_assoc($result))
 
 				$user_contacts[] = '<a href="'.pun_htmlspecialchars($cur_post['url']).'" rel="nofollow" title="'.$lang_topic['Website'].'"><span class="ui-icon ui-icon-home">'.$lang_topic['Website'].'</span></a>';
 			}
+
+// Start of Textpattern customisation
+			if ($cur_post['bitbucket'] != '')
+			{
+				if ($pun_config['o_censoring'] == '1')
+					$cur_post['bitbucket'] = censor_words($cur_post['bitbucket']);
+
+				$user_contacts[] = '<a href="'.pun_htmlspecialchars($cur_post['bitbucket']).'" rel="nofollow" title="Bitbucket"><span class="ui-icon ui-extra-icon-bitbucket">Bitbucket</span></a>';
+			}
+
+			if ($cur_post['github'] != '')
+			{
+				if ($pun_config['o_censoring'] == '1')
+					$cur_post['github'] = censor_words($cur_post['github']);
+
+				$user_contacts[] = '<a href="'.pun_htmlspecialchars($cur_post['github']).'" rel="nofollow" title="GitHub"><span class="ui-icon ui-extra-icon-github">GitHub</span></a>';
+			}
+
+			if ($cur_post['gitlab'] != '')
+			{
+				if ($pun_config['o_censoring'] == '1')
+					$cur_post['gitlab'] = censor_words($cur_post['gitlab']);
+
+				$user_contacts[] = '<a href="'.pun_htmlspecialchars($cur_post['gitlab']).'" rel="nofollow" title="GitLab"><span class="ui-icon ui-extra-icon-gitlab">GitLab</span></a>';
+			}
+
+			if ($cur_post['mastodon'] != '')
+			{
+				if ($pun_config['o_censoring'] == '1')
+					$cur_post['mastodon'] = censor_words($cur_post['mastodon']);
+
+				$user_contacts[] = '<a href="'.pun_htmlspecialchars($cur_post['mastodon']).'" rel="nofollow" title="Mastodon"><span class="ui-icon ui-extra-icon-mastodon">Mastodon</span></a>';
+			}
+
+			if ($cur_post['twitter'] != '')
+			{
+				if ($pun_config['o_censoring'] == '1')
+					$cur_post['twitter'] = censor_words($cur_post['twitter']);
+
+				$user_contacts[] = '<a href="'.pun_htmlspecialchars($cur_post['twitter']).'" rel="nofollow" title="Twitter"><span class="ui-icon ui-extra-icon-twitter">Twitter</span></a>';
+			}
+// End of Textpattern customisation
 		}
 
 		if ($pun_user['g_id'] == PUN_ADMIN || ($pun_user['g_moderator'] == '1' && $pun_user['g_mod_promote_users'] == '1'))
