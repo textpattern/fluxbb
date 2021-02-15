@@ -75,7 +75,6 @@ if (isset($_POST['form_sent']) && $action == 'in')
 			generate_users_info_cache();
 		}
 
-
 //
 // SpamBarrier BEGIN
 //

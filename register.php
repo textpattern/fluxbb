@@ -339,7 +339,6 @@ if (!empty($errors))
 						<input type="hidden" name="form_sent" value="1" />
 						<label class="required usernamefield"><strong><?php echo $lang_register['If human'] ?></strong><br /><input type="text" name="req_user" value="" size="25" maxlength="25" /><br /></label>
 						<label class="required"><strong><?php echo $lang_common['Username'] ?> <span><?php echo $lang_common['Required'] ?></span></strong><br /><input type="text" name="<?php echo $reqfield ?>" value="<?php if (isset($_POST[$reqfield])) echo pun_htmlspecialchars($_POST[$reqfield]); ?>" size="25" maxlength="25" autocomplete="username" required /><br /></label>
-
 					</div>
 				</fieldset>
 			</div>
