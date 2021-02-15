@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="<pun_language>">
 <head>
-    <script async src="style/Textpattern/js/hi.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <link rel="preload" href="https://textpattern.com/assets/fonts/pt-serif-v12-latin-ext-regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://textpattern.com/assets/fonts/pt-serif-v12-latin-ext-italic.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://textpattern.com/assets/fonts/pt-serif-v12-latin-ext-700.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://textpattern.com/assets/fonts/pt-serif-v12-latin-ext-700italic.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="style/Textpattern/css/style.1612537265518.css">
+    <link rel="preload" href="https://forum.textpattern.com/style/Textpattern/fonts/pt-serif-v12-latin-ext-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://forum.textpattern.com/style/Textpattern/fonts/pt-serif-v12-latin-ext-700.woff2" as="font" type="font/woff2" crossorigin>
+    <script>document.documentElement.className='js'</script>
+    <link rel="stylesheet" href="style/Textpattern/css/style.1613400302176.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="icon" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" sizes="16x16" href="/favicon-16x16.png">
     <meta name="color-scheme" content="dark light">
     <meta name="application-name" content="Textpattern Forum">
-    <script defer src="style/Textpattern/js/app.1612537265518.js"></script>
+    <script defer src="style/Textpattern/js/app.1613400302176.js"></script>
     <pun_head>
 </head>
 <body id="page-maintenance" itemscope itemtype="https://schema.org/WebPage">
