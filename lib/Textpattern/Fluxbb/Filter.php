@@ -62,7 +62,7 @@ class Filter
                 return;
             }
 
-            $sth = Db::pdo()->prepare('SELECT id FROM flx_users WHERE id = :user and group_id = 0');
+            $sth = Db::pdo()->prepare('SELECT id FROM flx_users WHERE id = :user and group_id = 0'); // TODO: allow user-specified prefix instead of hard-coding it.
             $sth->execute(array(':user' => $id));
 
             if ($sth->rowCount()) {
