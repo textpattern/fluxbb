@@ -231,7 +231,7 @@ if (isset($_GET['action']) || isset($_GET['search_id']))
 							}
 
 							++$word_count;
-							$db->free_result($result);
+							//$db->free_result($result);
 
 							break;
 						}
@@ -277,7 +277,7 @@ if (isset($_GET['action']) || isset($_GET['search_id']))
 					while ($temp = $db->fetch_assoc($result))
 						$author_results[$temp['post_id']] = $temp['topic_id'];
 
-					$db->free_result($result);
+					//$db->free_result($result);
 				}
 			}
 
@@ -399,7 +399,7 @@ if (isset($_GET['action']) || isset($_GET['search_id']))
 
 			$num_hits = count($search_ids);
 
-			$db->free_result($result);
+			//$db->free_result($result);
 		}
 		else
 			message($lang_common['Bad request'], false, '404 Not Found');
