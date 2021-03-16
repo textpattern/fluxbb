@@ -72,7 +72,7 @@ class PgsqlDBLayer implements DBLayer
 
 		// Setup the client-server character set (UTF-8)
 		if (!defined('FORUM_NO_SET_NAMES'))
-			$this->set_names('utf8');
+			$this->set_names('utf8mb4');
 	}
 
 

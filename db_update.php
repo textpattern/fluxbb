@@ -357,7 +357,7 @@ function convert_table_utf8($table, $callback, $old_charset, $key = null, $start
 		$result = $db->query('SELECT * FROM '.$table.(is_null($start_at) ? '' : ' WHERE '.$key.'>'.$start_at).' ORDER BY '.$key.' ASC'.(is_null($start_at) ? '' : ' LIMIT '.PER_PAGE), false) or error('Unable to select from old table', __FILE__, __LINE__, $db->error());
 
 		// Change back to utf8 mode so we can insert it into the new table
-		$db->set_names('utf8');
+		$db->set_names('utf8mb4');
 
 		while ($cur_item = $db->fetch_assoc($result))
 		{
